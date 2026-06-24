@@ -12,8 +12,8 @@ import '../styles/global.css';
 	<head>
 		<meta charset="UTF-8" />
 		<meta name="viewport" content="width=device-width" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<link rel="icon" href="/favicon.ico" />
+		<link rel="icon" type="image/svg+xml" href={`${import.meta.env.BASE_URL}favicon.svg`} />
+		<link rel="icon" href={`${import.meta.env.BASE_URL}favicon.ico`} />
 		<meta name="generator" content={Astro.generator} />
 		<title>{title}</title>
 		
@@ -49,5 +49,17 @@ import '../styles/global.css';
 	}
 	::-webkit-scrollbar-thumb:hover {
 		background: #E60012;
+	}
+
+	/* Custom date/time picker indicator inversion for dark theme */
+	input[type="date"]::-webkit-calendar-picker-indicator,
+	input[type="time"]::-webkit-calendar-picker-indicator {
+		filter: invert(1) sepia(1) saturate(5) hue-rotate(320deg) opacity(0.5);
+		cursor: pointer;
+		transition: opacity 0.3s ease;
+	}
+	input[type="date"]::-webkit-calendar-picker-indicator:hover,
+	input[type="time"]::-webkit-calendar-picker-indicator:hover {
+		opacity: 0.9;
 	}
 </style>

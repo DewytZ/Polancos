@@ -31,6 +31,10 @@ import Layout from '../layouts/Layout.astro';
 						Nosotros
 						<span class="absolute bottom-0 left-0 w-0 h-[1px] bg-sushi-red transition-all duration-300 group-hover:w-full"></span>
 					</a>
+					<a href="#reservar" class="gsap-nav-item hover:text-sushi-red transition-colors duration-300 relative group py-2">
+						Reservar
+						<span class="absolute bottom-0 left-0 w-0 h-[1px] bg-sushi-red transition-all duration-300 group-hover:w-full"></span>
+					</a>
 					<a href="#sucursales" class="gsap-nav-item gsap-btn bg-transparent border border-white/10 px-6 py-2.5 tracking-[0.3em]">
 						Sucursales
 					</a>
@@ -48,6 +52,7 @@ import Layout from '../layouts/Layout.astro';
 			<div id="mobile-menu" class="hidden md:hidden absolute top-full left-0 w-full bg-sushi-black/95 border-b border-white/10 px-8 py-8 flex flex-col space-y-6 text-center text-sm uppercase tracking-widest">
 				<a href="https://yomenu.com.mx/polancos-roll-sushi" target="_blank" rel="noopener noreferrer" class="mobile-link py-2 hover:text-sushi-red transition-colors duration-300">Menú</a>
 				<a href="#nosotros" class="mobile-link py-2 hover:text-sushi-red transition-colors duration-300">Nosotros</a>
+				<a href="#reservar" class="mobile-link py-2 hover:text-sushi-red transition-colors duration-300">Reservar</a>
 				<a href="#sucursales" class="mobile-link py-3 bg-sushi-red text-sushi-white tracking-widest gsap-btn">Sucursales</a>
 			</div>
 		</nav>
@@ -59,7 +64,7 @@ import Layout from '../layouts/Layout.astro';
 			<div class="w-full lg:w-1/2 space-y-8 z-10 flex flex-col justify-center">
 				<div class="inline-flex items-center space-x-3 text-sushi-red">
 					<span class="w-8 h-[1px] bg-sushi-red"></span>
-					<span class="text-xs uppercase tracking-[0.4em] font-semibold font-mono">SUSHI BOUTIQUE</span>
+					<span class="text-xs uppercase tracking-[0.4em] font-semibold font-mono">SUSHI ROLL</span>
 				</div>
 				<h1 class="text-4xl sm:text-5xl md:text-7xl font-extrabold tracking-tight leading-[1.05] uppercase font-['Cinzel'] gsap-hero-title">
 					<span class="block overflow-hidden py-1">
@@ -76,8 +81,8 @@ import Layout from '../layouts/Layout.astro';
 					En Polanco's redefinimos el sushi de alta gama. Cada ingrediente es seleccionado por su frescura excepcional, logrando una combinación perfecta entre textura, temperatura y sabor.
 				</p>
 				<div class="pt-6 flex flex-col sm:flex-row gap-4 items-start sm:items-center gsap-hero-cta opacity-0">
-					<a href="#sucursales" class="gsap-btn bg-sushi-red text-sushi-white font-semibold uppercase tracking-[0.2em] text-xs px-8 py-5 border border-sushi-red shadow-xl shadow-sushi-red/10 block text-center w-full sm:w-auto">
-						Ubicaciones
+					<a href="#reservar" class="gsap-btn bg-sushi-red text-sushi-white font-semibold uppercase tracking-[0.2em] text-xs px-8 py-5 border border-sushi-red shadow-xl shadow-sushi-red/10 block text-center w-full sm:w-auto">
+						Reservar Mesa
 					</a>
 					<a href="https://yomenu.com.mx/polancos-roll-sushi" target="_blank" rel="noopener noreferrer" class="gsap-btn group flex items-center justify-center sm:justify-start space-x-3 font-semibold uppercase tracking-[0.2em] text-xs px-8 py-5 text-sushi-white w-full sm:w-auto">
 						<span>Ver Menú Completo</span>
@@ -102,10 +107,10 @@ import Layout from '../layouts/Layout.astro';
 
 					<!-- Contenedor del Visualizador de Imágenes Reales -->
 					<div class="w-full h-80 relative overflow-hidden my-6 border border-white/5 bg-neutral-950" id="sushi-display">
-						<img id="img-sushi-grenudo" src="/images/grenudo.jpg" alt="Sushi Greñudo" class="absolute inset-0 w-full h-full object-cover transition-all duration-700 scale-100 opacity-100" />
-						<img id="img-sushi-san-andres" src="/images/san_andres.jpg" alt="Sushi San Andres" class="absolute inset-0 w-full h-full object-cover transition-all duration-700 scale-95 opacity-0 hidden" />
-						<img id="img-sushi-avocado" src="/images/avocado.jpg" alt="Sushi Avocado" class="absolute inset-0 w-full h-full object-cover transition-all duration-700 scale-95 opacity-0 hidden" />
-						<img id="img-sushi-tigre" src="/images/tigre.jpg" alt="Sushi Tigre" class="absolute inset-0 w-full h-full object-cover transition-all duration-700 scale-95 opacity-0 hidden" />
+						<img id="img-sushi-grenudo" src={`${import.meta.env.BASE_URL}images/grenudo.jpg`} alt="Sushi Greñudo" class="absolute inset-0 w-full h-full object-cover transition-all duration-700 scale-100 opacity-100" />
+						<img id="img-sushi-san-andres" src={`${import.meta.env.BASE_URL}images/san_andres.jpg`} alt="Sushi San Andres" class="absolute inset-0 w-full h-full object-cover transition-all duration-700 scale-95 opacity-0 hidden" />
+						<img id="img-sushi-avocado" src={`${import.meta.env.BASE_URL}images/avocado.jpg`} alt="Sushi Avocado" class="absolute inset-0 w-full h-full object-cover transition-all duration-700 scale-95 opacity-0 hidden" />
+						<img id="img-sushi-tigre" src={`${import.meta.env.BASE_URL}images/tigre.jpg`} alt="Sushi Tigre" class="absolute inset-0 w-full h-full object-cover transition-all duration-700 scale-95 opacity-0 hidden" />
 						<div class="absolute inset-0 bg-gradient-to-t from-sushi-black/70 via-transparent to-transparent"></div>
 					</div>
 
@@ -113,7 +118,7 @@ import Layout from '../layouts/Layout.astro';
 					<div class="space-y-3 transition-opacity duration-300" id="roll-details-container">
 						<div class="flex justify-between items-baseline border-b border-white/5 pb-3">
 							<h3 class="text-xl font-bold uppercase tracking-wider font-['Cinzel'] text-sushi-white" id="roll-name">GREÑUDO</h3>
-							<span class="text-sushi-red font-mono font-bold text-lg" id="roll-price">$210</span>
+							<span class="text-sushi-red font-mono font-bold text-lg" id="roll-price">$125</span>
 						</div>
 						<p class="text-neutral-400 text-xs leading-relaxed" id="roll-desc">
 							Philadelphia, Aguacate, Pepino, Surimi empanizado, coronado con ajonjolí y salsa de Anguila. Por fuera Surimi desmechado, aderezo Chipotle y cebollín.
@@ -175,6 +180,180 @@ import Layout from '../layouts/Layout.astro';
 			</div>
 		</section>
 
+		<!-- 📌 SECCIÓN DE RESERVACIONES -->
+		<section id="reservar" class="py-24 border-t border-white/5 relative">
+			<div class="absolute inset-0 bg-[radial-gradient(#ffffff01_1px,transparent_1px)] bg-[size:32px_32px] pointer-events-none"></div>
+			
+			<div class="px-8 md:px-16 max-w-7xl mx-auto relative">
+				<div class="flex flex-col lg:flex-row gap-16 items-start">
+					
+					<!-- Columna Información (Izquierda) -->
+					<div class="w-full lg:w-5/12 space-y-8">
+						<div class="inline-flex items-center space-x-3 text-sushi-red">
+							<span class="w-8 h-[1px] bg-sushi-red"></span>
+							<span class="text-xs uppercase tracking-[0.4em] font-semibold font-mono">EXPERIENCIA</span>
+						</div>
+						<h2 class="text-3xl md:text-5xl font-extrabold uppercase tracking-wide font-['Cinzel'] gsap-booking-title">
+							<span class="inline-block overflow-hidden py-1">
+								<span class="inline-block booking-title-line">Asegura</span>
+							</span>
+							<span class="inline-block overflow-hidden py-1">
+								<span class="inline-block booking-title-line text-sushi-red">Tu Mesa</span>
+							</span>
+						</h2>
+						<div class="space-y-4 text-neutral-400 text-sm font-light leading-relaxed max-w-md">
+							<p>
+								Debido a nuestro aforo limitado y nuestra dedicación a la precisión en cada platillo, te recomendamos realizar tu reservación con anticipación.
+							</p>
+							<p>
+								Una vez completado el formulario, nuestro personal procesará tu solicitud y se pondrá en contacto contigo vía WhatsApp para confirmar tu espacio y coordinar cualquier preferencia especial.
+							</p>
+						</div>
+						
+						<!-- Detalles rápidos -->
+						<div class="pt-6 border-t border-white/5 space-y-4">
+							<div class="flex items-center space-x-4">
+								<div class="w-8 h-8 rounded-full border border-white/10 flex items-center justify-center text-sushi-red text-xs">✓</div>
+								<span class="text-xs text-neutral-300 font-light">Confirmación directa por WhatsApp</span>
+							</div>
+							<div class="flex items-center space-x-4">
+								<div class="w-8 h-8 rounded-full border border-white/10 flex items-center justify-center text-sushi-red text-xs">✓</div>
+								<span class="text-xs text-neutral-300 font-light">Sin costos de reservación</span>
+							</div>
+						</div>
+					</div>
+					
+					<!-- Columna Formulario (Derecha) -->
+					<div class="w-full lg:w-7/12 border border-white/5 bg-gradient-to-b from-white/[0.02] to-transparent p-8 md:p-12 backdrop-blur-md relative overflow-hidden">
+						
+						<!-- Banner de Feedback Visual -->
+						<div id="booking-feedback" class="absolute inset-0 bg-sushi-black/95 backdrop-blur-md flex flex-col items-center justify-center p-8 text-center hidden z-20 opacity-0">
+							<div class="w-16 h-16 border border-sushi-red/30 rounded-full flex items-center justify-center mb-6" id="feedback-icon-container">
+								<!-- Spinner animado para carga / Check para success -->
+								<div id="feedback-spinner" class="w-6 h-6 border-2 border-sushi-red border-t-transparent rounded-full animate-spin"></div>
+								<svg id="feedback-success-check" class="w-8 h-8 text-sushi-red hidden" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+									<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7" />
+								</svg>
+							</div>
+							<h3 class="text-xl font-bold uppercase tracking-wider font-['Cinzel'] text-sushi-white mb-3" id="feedback-title">Enviando...</h3>
+							<p class="text-neutral-400 text-sm max-w-sm font-light leading-relaxed" id="feedback-desc">
+								Procesando tu solicitud de reservación. Por favor espera.
+							</p>
+							<button id="feedback-btn" class="mt-8 gsap-btn border border-white/10 px-6 py-2.5 text-xs uppercase tracking-widest hover:border-sushi-red hover:text-sushi-red transition-colors duration-300 hidden">
+								Entendido
+							</button>
+						</div>
+						
+						<form id="booking-form" class="space-y-8">
+							<!-- Nombre completo -->
+							<div class="space-y-2">
+								<label for="booking-name" class="block text-[10px] uppercase tracking-[0.2em] text-neutral-500 font-mono">Nombre Completo</label>
+								<input 
+									type="text" 
+									name="name" 
+									id="booking-name" 
+									placeholder="Ej. Alejandro Polanco" 
+									required
+									class="bg-transparent border-b border-white/10 py-3 px-1 text-sushi-white placeholder:text-neutral-700 focus:outline-none focus:border-sushi-red focus:placeholder:text-neutral-600 transition-colors duration-300 w-full text-sm font-light"
+								/>
+							</div>
+							
+							<!-- WhatsApp / Teléfono -->
+							<div class="space-y-2">
+								<label for="booking-phone" class="block text-[10px] uppercase tracking-[0.2em] text-neutral-500 font-mono">WhatsApp / Teléfono</label>
+								<input 
+									type="tel" 
+									name="phone" 
+									id="booking-phone" 
+									placeholder="Ej. +52 667 123 4567" 
+									required
+									class="bg-transparent border-b border-white/10 py-3 px-1 text-sushi-white placeholder:text-neutral-700 focus:outline-none focus:border-sushi-red focus:placeholder:text-neutral-600 transition-colors duration-300 w-full text-sm font-light"
+								/>
+							</div>
+
+							<!-- Sucursal / Zona -->
+							<div class="space-y-2">
+								<label for="booking-zone" class="block text-[10px] uppercase tracking-[0.2em] text-neutral-500 font-mono">Sucursal / Zona</label>
+								<div class="relative">
+									<select 
+										name="zona" 
+										id="booking-zone" 
+										required
+										class="bg-transparent border-b border-white/10 py-3 px-1 text-sushi-white focus:outline-none focus:border-sushi-red transition-colors duration-300 w-full text-sm font-light appearance-none cursor-pointer"
+									>
+										<option value="" disabled selected class="bg-sushi-black text-neutral-500">Seleccionar sucursal</option>
+										<option value="Conquista" class="bg-sushi-black text-sushi-white">Conquista (Principal)</option>
+										<option value="Universitarios" class="bg-sushi-black text-sushi-white">Universitarios</option>
+										<option value="Valle Alto" class="bg-sushi-black text-sushi-white">Valle Alto</option>
+										<option value="Plaza Sendero" class="bg-sushi-black text-sushi-white">Plaza Sendero</option>
+									</select>
+									<!-- Custom Chevron Arrow -->
+									<div class="absolute inset-y-0 right-2 flex items-center pointer-events-none text-neutral-500">
+										<svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+											<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+										</svg>
+									</div>
+								</div>
+							</div>
+							
+							<!-- Grid de Fecha y Hora -->
+							<div class="grid grid-cols-1 sm:grid-cols-2 gap-8">
+								<!-- Fecha -->
+								<div class="space-y-2">
+									<label for="booking-date" class="block text-[10px] uppercase tracking-[0.2em] text-neutral-500 font-mono">Fecha</label>
+									<input 
+										type="date" 
+										name="date" 
+										id="booking-date" 
+										required
+										class="bg-transparent border-b border-white/10 py-3 px-1 text-sushi-white placeholder:text-neutral-700 focus:outline-none focus:border-sushi-red transition-colors duration-300 w-full text-sm font-light"
+									/>
+								</div>
+								<!-- Hora -->
+								<div class="space-y-2">
+									<label for="booking-time" class="block text-[10px] uppercase tracking-[0.2em] text-neutral-500 font-mono">Hora</label>
+									<input 
+										type="time" 
+										name="time" 
+										id="booking-time" 
+										required
+										class="bg-transparent border-b border-white/10 py-3 px-1 text-sushi-white placeholder:text-neutral-700 focus:outline-none focus:border-sushi-red transition-colors duration-300 w-full text-sm font-light"
+									/>
+								</div>
+							</div>
+							
+							<!-- Cantidad de personas -->
+							<div class="space-y-2">
+								<label for="booking-guests" class="block text-[10px] uppercase tracking-[0.2em] text-neutral-500 font-mono">Cantidad de personas</label>
+								<input 
+									type="number" 
+									name="guests" 
+									id="booking-guests" 
+									min="1" 
+									max="20"
+									placeholder="Ej. 4" 
+									required
+									class="bg-transparent border-b border-white/10 py-3 px-1 text-sushi-white placeholder:text-neutral-700 focus:outline-none focus:border-sushi-red focus:placeholder:text-neutral-600 transition-colors duration-300 w-full text-sm font-light"
+								/>
+							</div>
+							
+							<!-- Botón de Envío -->
+							<div class="pt-4">
+								<button 
+									type="submit" 
+									id="booking-submit-btn" 
+									class="gsap-btn w-full bg-sushi-red text-sushi-white font-semibold uppercase tracking-[0.2em] text-xs py-5 border border-sushi-red shadow-xl shadow-sushi-red/10 block text-center cursor-pointer"
+								>
+									Confirmar Reservación
+								</button>
+							</div>
+						</form>
+					</div>
+					
+				</div>
+			</div>
+		</section>
+
 		<!-- 📌 SECCIÓN DE SUCURSALES -->
 		<section id="sucursales" class="py-24 border-t border-white/5 relative bg-gradient-to-b from-transparent via-[#090909] to-sushi-black">
 			<div class="px-8 md:px-16 max-w-7xl mx-auto">
@@ -200,11 +379,11 @@ import Layout from '../layouts/Layout.astro';
 				<!-- Grid de Sucursales (4 Columnas) -->
 				<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
 					
-					<!-- Sucursal 1: La Conquista -->
+					<!-- Sucursal 1: Conquista -->
 					<div class="group border border-white/5 bg-gradient-to-b from-white/[0.02] to-transparent p-6 backdrop-blur-sm flex flex-col justify-between h-[360px] gsap-branch-card">
 						<div class="space-y-5">
 							<div class="flex justify-between items-start">
-								<h3 class="text-lg font-bold uppercase tracking-wider font-['Cinzel'] text-sushi-white group-hover:text-sushi-red transition-colors duration-300">La Conquista</h3>
+								<h3 class="text-lg font-bold uppercase tracking-wider font-['Cinzel'] text-sushi-white group-hover:text-sushi-red transition-colors duration-300">Conquista</h3>
 								<span class="text-[9px] bg-sushi-red/10 text-sushi-red px-2 py-0.5 font-mono uppercase tracking-widest font-semibold">Principal</span>
 							</div>
 							
@@ -346,16 +525,32 @@ import Layout from '../layouts/Layout.astro';
 			</div>
 		</section>
 
-		<!-- 📌 PIE DE PÁGINA (FOOTER MINIMALISTA) -->
 		<footer class="py-12 border-t border-white/5 bg-sushi-black">
 			<div class="px-8 md:px-16 max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-6">
 				<!-- Copyright -->
-				<span class="text-neutral-500 text-xs font-mono uppercase tracking-widest">
+				<span class="text-neutral-500 text-xs font-mono uppercase tracking-widest order-2 md:order-1">
 					© 2026 POLANCO'S. TODOS LOS DERECHOS RESERVADOS.
 				</span>
 				
+				<!-- Redes Sociales (Instagram) -->
+				<div class="flex items-center justify-center order-1 md:order-2">
+					<a 
+						href="https://www.instagram.com/polancos_roll/" 
+						target="_blank" 
+						rel="noopener noreferrer" 
+						aria-label="Instagram de Polanco's Roll"
+						class="text-neutral-500 hover:text-sushi-red hover:scale-110 hover:border-sushi-red/20 transition-all duration-300 p-3 border border-white/5 rounded-full bg-white/[0.01] flex items-center justify-center"
+					>
+						<svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round">
+							<rect x="2" y="2" width="20" height="20" rx="5" ry="5" />
+							<path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z" />
+							<line x1="17.5" y1="6.5" x2="17.51" y2="6.5" />
+						</svg>
+					</a>
+				</div>
+				
 				<!-- Leyenda del Maestro -->
-				<span class="text-neutral-600 text-[10px] tracking-[0.2em] uppercase font-mono italic">
+				<span class="text-neutral-600 text-[10px] tracking-[0.2em] uppercase font-mono italic order-3">
 					Hecho con precisión y calma
 				</span>
 			</div>
@@ -372,60 +567,7 @@ import Layout from '../layouts/Layout.astro';
 
 	gsap.registerPlugin(ScrollTrigger);
 
-	// 1. Custom TextScramble Class (glitch typewriter using Latin and Japanese symbols)
-	class TextScramble {
-		constructor(el) {
-			this.el = el;
-			this.chars = '!<>-_\\/[]{}—=+*^?#________あいうえおかきくけこ';
-			this.update = this.update.bind(this);
-		}
-		setText(newText) {
-			const oldText = this.el.textContent || '';
-			const length = Math.max(oldText.length, newText.length);
-			const promise = new Promise((resolve) => this.resolve = resolve);
-			this.queue = [];
-			for (let i = 0; i < length; i++) {
-				const from = oldText[i] || '';
-				const to = newText[i] || '';
-				const start = Math.floor(Math.random() * 20);
-				const end = start + Math.floor(Math.random() * 20);
-				this.queue.push({ from, to, start, end });
-			}
-			cancelAnimationFrame(this.frameRequest);
-			this.frame = 0;
-			this.update();
-			return promise;
-		}
-		update() {
-			let output = '';
-			let complete = 0;
-			for (let i = 0, n = this.queue.length; i < n; i++) {
-				let { from, to, start, end, char } = this.queue[i];
-				if (this.frame >= end) {
-					complete++;
-					output += to;
-				} else if (this.frame >= start) {
-					if (!char || Math.random() < 0.28) {
-						char = this.randomChar();
-						this.queue[i].char = char;
-					}
-					output += `<span class="text-sushi-red/60 font-mono">${char}</span>`;
-				} else {
-					output += from;
-				}
-			}
-			this.el.innerHTML = output;
-			if (complete === this.queue.length) {
-				this.resolve();
-			} else {
-				this.frameRequest = requestAnimationFrame(this.update);
-				this.frame++;
-			}
-		}
-		randomChar() {
-			return this.chars[Math.floor(Math.random() * this.chars.length)];
-		}
-	}
+
 
 	// 2. Initialize Lenis Smooth Scroll (Inertial Scroll to replicate ScrollSmoother)
 	const lenis = new Lenis({
@@ -452,25 +594,25 @@ import Layout from '../layouts/Layout.astro';
 		{
 			id: "01",
 			name: "GREÑUDO",
-			price: "$210 MXN",
+			price: "$125 MXN",
 			desc: "Philadelphia, Aguacate, Pepino, Surimi empanizado, coronado con ajonjolí y salsa de Anguila. Por fuera Surimi desmechado, aderezo Chipotle y cebollín."
 		},
 		{
 			id: "02",
 			name: "SAN ANDRÉS",
-			price: "$230 MXN",
+			price: "$150 MXN",
 			desc: "Pollo, camarón empanizado y tocino por dentro. Horneado con una mezcla cremosa de quesos y aderezo spicy, coronado con rodajas de chile serrano y salsa de anguila."
 		},
 		{
 			id: "03",
 			name: "AVOCADO ROLL",
-			price: "$215 MXN",
+			price: "$145 MXN",
 			desc: "Philadelphia, aguacate, pepino, camarón, surimi empanizado. Forrado de aguacate con un topping de surimi frito, bañado con salsa de anguila, aderezo y coronado con ajonjolí."
 		},
 		{
 			id: "04",
 			name: "TIGRE SPECIAL",
-			price: "$245 MXN",
+			price: "$195 MXN",
 			desc: "Queso, aguacate, res y camarón por dentro. Gratinado con res, pollo, tocino y chipotle; coronado de camarón empanizado, salsa de anguila, aderezo de chipotle y aderezo de cilantro con ajonjolí."
 		}
 	];
@@ -488,12 +630,6 @@ import Layout from '../layouts/Layout.astro';
 	const imgAvocado = document.getElementById('img-sushi-avocado');
 	const imgTigreReal = document.getElementById('img-sushi-tigre');
 	const imgs = [imgGrenudo, imgSanAndres, imgAvocado, imgTigreReal];
-
-	// Initialize Scramble controllers on target detail text nodes
-	let scrambleName, scramblePrice, scrambleDesc;
-	if (nameEl) scrambleName = new TextScramble(nameEl);
-	if (priceEl) scramblePrice = new TextScramble(priceEl);
-	if (descEl) scrambleDesc = new TextScramble(descEl);
 
 	tabs.forEach(tab => {
 		tab.addEventListener('click', () => {
@@ -525,20 +661,20 @@ import Layout from '../layouts/Layout.astro';
 				}
 			});
 
-			// Animate and Switch Images via GSAP
+			// 1. Fast Image Switch (appear first)
 			imgs.forEach((img, i) => {
 				if (img) {
 					if (i === index) {
 						img.classList.remove('hidden');
 						gsap.fromTo(img, 
-							{ opacity: 0, scale: 0.95 },
-							{ opacity: 1, scale: 1, duration: 0.6, ease: 'power2.out' }
+							{ opacity: 0, scale: 1.05 },
+							{ opacity: 1, scale: 1, duration: 0.45, ease: 'power2.out' }
 						);
 					} else {
 						gsap.to(img, {
 							opacity: 0,
 							scale: 0.95,
-							duration: 0.6,
+							duration: 0.45,
 							ease: 'power2.out',
 							onComplete: () => img.classList.add('hidden')
 						});
@@ -546,11 +682,34 @@ import Layout from '../layouts/Layout.astro';
 				}
 			});
 
-			// Trigger Scramble Text transitions
-			if (scrambleName && activeRoll.name) scrambleName.setText(activeRoll.name);
-			if (scramblePrice && activeRoll.price) scramblePrice.setText(activeRoll.price);
-			if (scrambleDesc && activeRoll.desc) scrambleDesc.setText(activeRoll.desc);
-			if (numberEl) numberEl.textContent = `${activeRoll.id} / 04`;
+			// 2. Liquid slide-fade text reveal animation (replacing Scramble)
+			const textElements = [nameEl, priceEl, descEl];
+			gsap.to(textElements, {
+				opacity: 0,
+				y: -10,
+				duration: 0.25,
+				ease: 'power2.in',
+				stagger: 0.04,
+				onComplete: () => {
+					// Update text values
+					if (nameEl && activeRoll.name) nameEl.textContent = activeRoll.name;
+					if (priceEl && activeRoll.price) priceEl.textContent = activeRoll.price;
+					if (descEl && activeRoll.desc) descEl.textContent = activeRoll.desc;
+					if (numberEl) numberEl.textContent = `${activeRoll.id} / 04`;
+
+					// Set initial state for reveal
+					gsap.set(textElements, { y: 15, opacity: 0 });
+
+					// Fade back in
+					gsap.to(textElements, {
+						opacity: 1,
+						y: 0,
+						duration: 0.45,
+						ease: 'power3.out',
+						stagger: 0.06
+					});
+				}
+			});
 		});
 	});
 
@@ -610,16 +769,26 @@ import Layout from '../layouts/Layout.astro';
 	window.addEventListener('DOMContentLoaded', () => {
 		// Set initial states
 		gsap.set(".gsap-nav", { opacity: 0, y: -20 });
-		gsap.set(".hero-title-line", { y: 80 });
-		gsap.set([".gsap-hero-desc", ".gsap-hero-cta"], { opacity: 0, y: 20 });
-		gsap.set(".gsap-hero-interactive", { opacity: 0, scale: 0.95 });
+		gsap.set(".hero-title-line", { y: "135%" }); // Increased translation to 135% to fully mask the serif accent of 'Precisión'
+		gsap.set([".gsap-hero-desc", ".gsap-hero-cta"], { opacity: 0, y: 15 });
+		gsap.set(".gsap-hero-interactive", { opacity: 0, scale: 0.9 });
+		gsap.set("#img-sushi-grenudo", { scale: 1.2 });
 
-		// Entrance Timeline
-		const tl = gsap.timeline({ delay: 0.2 });
-		tl.to(".gsap-nav", { opacity: 1, y: 0, duration: 0.8, ease: "power2.out" })
-			.to(".hero-title-line", { y: 0, duration: 1, ease: "power4.out", stagger: 0.15 }, "-=0.4")
-			.to([".gsap-hero-desc", ".gsap-hero-cta"], { opacity: 1, y: 0, duration: 0.8, ease: "power2.out", stagger: 0.15 }, "-=0.6")
-			.to(".gsap-hero-interactive", { opacity: 1, scale: 1, duration: 1.2, ease: "power3.out" }, "-=0.8");
+		// Entrance Timeline (First text letters, then the roll visualizer)
+		const tl = gsap.timeline({ delay: 0.1 });
+		
+		// 1. Navbar and Main title lines reveal first
+		tl.to(".gsap-nav", { opacity: 1, y: 0, duration: 0.7, ease: "power2.out" })
+			.to(".hero-title-line", { y: 0, duration: 1.1, ease: "power4.out", stagger: 0.15 }, "-=0.4")
+			
+			// 2. Description and CTA buttons slide in
+			.to([".gsap-hero-desc", ".gsap-hero-cta"], { opacity: 1, y: 0, duration: 0.7, ease: "power2.out", stagger: 0.08 }, "-=0.6")
+			
+			// 3. Sushi visualizer fades in and settles at the end of the timeline
+			.to(".gsap-hero-interactive", { opacity: 1, scale: 1, duration: 0.9, ease: "power3.out" }, "-=0.3")
+			
+			// Smoothly scale down the image in parallel
+			.to("#img-sushi-grenudo", { scale: 1, duration: 1.4, ease: "power2.out" }, "-=0.9");
 		
 
 
@@ -712,5 +881,181 @@ import Layout from '../layouts/Layout.astro';
 				});
 			});
 		});
+
+		// Scroll Trigger Animations for Reservations Title
+		gsap.from(".booking-title-line", {
+			scrollTrigger: {
+				trigger: "#reservar",
+				start: "top 85%"
+			},
+			y: "100%",
+			duration: 1,
+			ease: "power4.out",
+			stagger: 0.15
+		});
+
+		// Restricciones de Fecha y Hora dinámicas para Reservaciones
+		const bookingDateInput = document.getElementById('booking-date');
+		const bookingTimeInput = document.getElementById('booking-time');
+
+		if (bookingDateInput && bookingTimeInput) {
+			const now = new Date();
+			let minDate = new Date(now);
+			
+			// Si son después de las 23:00 (11 PM), las reservaciones comienzan a partir de mañana
+			if (now.getHours() >= 23) {
+				minDate.setDate(minDate.getDate() + 1);
+			}
+			
+			// Fecha máxima permitida: 1 semana después
+			const maxDate = new Date(minDate);
+			maxDate.setDate(maxDate.getDate() + 7);
+
+			const formatDate = (d) => {
+				const year = d.getFullYear();
+				const month = String(d.getMonth() + 1).padStart(2, '0');
+				const day = String(d.getDate()).padStart(2, '0');
+				return `${year}-${month}-${day}`;
+			};
+
+			const todayString = formatDate(minDate);
+			bookingDateInput.min = todayString;
+			bookingDateInput.max = formatDate(maxDate);
+
+			// Establecer la fecha actual por defecto
+			bookingDateInput.value = todayString;
+
+			// Función para actualizar los límites de la hora
+			const updateTimeConstraints = () => {
+				const selectedDate = bookingDateInput.value;
+				const currentDateStr = formatDate(new Date());
+
+				if (selectedDate === currentDateStr) {
+					// Mismo día: min es la hora actual, max es 23:00
+					const currentHours = String(now.getHours()).padStart(2, '0');
+					const currentMinutes = String(now.getMinutes()).padStart(2, '0');
+					const minTime = `${currentHours}:${currentMinutes}`;
+					
+					bookingTimeInput.min = minTime;
+					bookingTimeInput.max = "23:00";
+					
+					// Ajustar el valor actual si queda fuera del rango permitido
+					if (bookingTimeInput.value && (bookingTimeInput.value < minTime || bookingTimeInput.value > "23:00")) {
+						bookingTimeInput.value = minTime;
+					}
+				} else {
+					// Días futuros: min es la hora de apertura general (10:00 AM), max es 11:00 PM (23:00)
+					bookingTimeInput.min = "10:00";
+					bookingTimeInput.max = "23:00";
+				}
+			};
+
+			// Ejecutar inicialmente y cada vez que cambie la fecha
+			updateTimeConstraints();
+			bookingDateInput.addEventListener('change', updateTimeConstraints);
+
+			// Lógica de Envío del Formulario de Reservación
+			const bookingForm = document.getElementById('booking-form');
+			const bookingFeedback = document.getElementById('booking-feedback');
+			const feedbackSpinner = document.getElementById('feedback-spinner');
+			const feedbackSuccessCheck = document.getElementById('feedback-success-check');
+			const feedbackTitle = document.getElementById('feedback-title');
+			const feedbackDesc = document.getElementById('feedback-desc');
+			const feedbackBtn = document.getElementById('feedback-btn');
+
+			if (bookingForm && bookingFeedback) {
+				bookingForm.addEventListener('submit', async (e) => {
+					e.preventDefault();
+
+					// Show loading feedback state
+					bookingFeedback.classList.remove('hidden');
+					gsap.to(bookingFeedback, { opacity: 1, duration: 0.4, ease: 'power2.out' });
+					
+					if (feedbackSpinner) feedbackSpinner.classList.remove('hidden');
+					if (feedbackSuccessCheck) feedbackSuccessCheck.classList.add('hidden');
+					if (feedbackTitle) feedbackTitle.textContent = 'Enviando...';
+					if (feedbackDesc) feedbackDesc.textContent = 'Procesando tu solicitud de reservación. Por favor espera.';
+					if (feedbackBtn) feedbackBtn.classList.add('hidden');
+
+					// Collect input values using Spanish keys to match GAS properties
+					const formData = new FormData(bookingForm);
+					const data = {
+						nombre: formData.get('name'),
+						whatsapp: formData.get('phone'),
+						fecha: formData.get('date'),
+						hora: formData.get('time'),
+						personas: formData.get('guests'),
+						zona: formData.get('zona')
+					};
+
+					const ENDPOINT_URL = 'https://script.google.com/macros/s/AKfycbzJq_F1uu0DfTBRvMSJBLxk0bwE6_mWeuV_KiKXl6Tr0GxayD4nt6FoxKtGZCRRI_NnUg/exec';
+
+					try {
+						let response;
+						if (ENDPOINT_URL === '#') {
+							// Simulate API transmission delay
+							await new Promise(resolve => setTimeout(resolve, 1500));
+							response = { ok: true };
+						} else {
+							// Send request with mode: 'no-cors' to avoid preflight blocks from Google Apps Script
+							await fetch(ENDPOINT_URL, {
+								method: 'POST',
+								mode: 'no-cors',
+								headers: {
+									'Content-Type': 'text/plain;charset=utf-8'
+								},
+								body: JSON.stringify(data)
+							});
+							// In no-cors mode we cannot inspect status, so if no exception is thrown, we treat it as success
+							response = { ok: true };
+						}
+
+						if (response.ok) {
+							// Success State
+							if (feedbackSpinner) feedbackSpinner.classList.add('hidden');
+							if (feedbackSuccessCheck) feedbackSuccessCheck.classList.remove('hidden');
+							if (feedbackTitle) feedbackTitle.textContent = '¡Reservación recibida!';
+							if (feedbackDesc) feedbackDesc.textContent = 'Nos comunicaremos por WhatsApp para confirmar.';
+							if (feedbackBtn) {
+								feedbackBtn.classList.remove('hidden');
+								feedbackBtn.onclick = () => {
+									gsap.to(bookingFeedback, { 
+										opacity: 0, 
+										duration: 0.3, 
+										ease: 'power2.in',
+										onComplete: () => {
+											bookingFeedback.classList.add('hidden');
+											bookingForm.reset();
+											
+											// Re-initialize dynamic date/time defaults after form reset
+											updateTimeConstraints();
+										}
+									});
+								};
+							}
+						} else {
+							throw new Error('Server error');
+						}
+					} catch (error) {
+						// Error State
+						if (feedbackSpinner) feedbackSpinner.classList.add('hidden');
+						if (feedbackSuccessCheck) feedbackSuccessCheck.classList.add('hidden');
+						if (feedbackTitle) feedbackTitle.textContent = 'Error al Enviar';
+						if (feedbackDesc) feedbackDesc.textContent = 'Ocurrió un problema de red. Por favor intenta de nuevo.';
+						if (feedbackBtn) {
+							feedbackBtn.classList.remove('hidden');
+							feedbackBtn.onclick = () => {
+								gsap.to(bookingFeedback, { 
+									opacity: 0, 
+									duration: 0.3, 
+									ease: 'power2.in',
+									onComplete: () => bookingFeedback.classList.add('hidden')
+								});
+							};
+						}
+					}
+				});
+			}
+		}
 	});
 </script>

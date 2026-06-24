@@ -1,0 +1,49 @@
+html {
+    height: 100%;
+    margin: 0;
+    width: 100%;
+    background-color: #0A0A0A;
+}
+
+body {
+    min-height: 100%;
+    margin: 0;
+    width: 100%;
+    background-color: #0A0A0A;
+}
+
+/* Recommended by Lenis for compatibility */
+html.lenis, html.lenis body {
+    height: auto;
+}
+
+.lenis.lenis-smooth {
+    scroll-behavior: auto !important;
+}
+
+/* Custom luxury scrollbar */
+::-webkit-scrollbar {
+    width: 6px;
+}
+::-webkit-scrollbar-track {
+    background: #0A0A0A;
+}
+::-webkit-scrollbar-thumb {
+    background: #262626;
+    border-radius: 3px;
+}
+::-webkit-scrollbar-thumb:hover {
+    background: #E60012;
+}
+
+/* Custom date/time picker indicator inversion for dark theme */
+input[type="date"]::-webkit-calendar-picker-indicator,
+input[type="time"]::-webkit-calendar-picker-indicator {
+    filter: invert(1) sepia(1) saturate(5) hue-rotate(320deg) opacity(0.5);
+    cursor: pointer;
+    transition: opacity 0.3s ease;
+}
+input[type="date"]::-webkit-calendar-picker-indicator:hover,
+input[type="time"]::-webkit-calendar-picker-indicator:hover {
+    opacity: 0.9;
+}

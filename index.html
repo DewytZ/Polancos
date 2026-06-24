@@ -1,0 +1,603 @@
+<!doctype html>
+<html lang="es" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Polanco's Roll Sushi | Experiencia Gastronómica Premium</title>
+    
+    <!-- Favicons -->
+    <link rel="icon" type="image/svg+xml" href="favicon.svg">
+    <link rel="icon" href="favicon.ico">
+    
+    <!-- Google Fonts: Cinzel for headers, Inter for body -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;700;800&family=Inter:wght@200;300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Custom Style Sheet -->
+    <link rel="stylesheet" href="css/style.css">
+    
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'sushi-black': '#0A0A0A',
+                        'sushi-white': '#F5F5F7',
+                        'sushi-red': '#E60012',
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'SF Pro Display', 'system-ui', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    
+    <!-- CDNs: Lenis, GSAP, ScrollTrigger -->
+    <script src="https://cdn.jsdelivr.net/npm/lenis@1.1.18/dist/lenis.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+    
+    <!-- Custom script -->
+    <script src="js/main.js" defer></script>
+</head>
+<body class="bg-sushi-black text-sushi-white font-sans antialiased min-h-screen overflow-x-hidden selection:bg-sushi-red selection:text-sushi-white">
+
+	<!-- Contenedor Principal (Fondo Negro Absoluto) -->
+	<main class="bg-sushi-black text-sushi-white min-h-screen font-sans selection:bg-sushi-red selection:text-sushi-white relative overflow-x-hidden">
+		
+		<!-- Efectos Ambientales de Fondo (Espacio Negativo con Sutiles Luces) -->
+		<div class="absolute top-[-10%] right-[-10%] w-[500px] h-[500px] bg-sushi-red/5 rounded-full blur-[120px] pointer-events-none"></div>
+		<div class="absolute bottom-[20%] left-[-10%] w-[600px] h-[600px] bg-sushi-red/[0.03] rounded-full blur-[140px] pointer-events-none"></div>
+		
+		<!-- Líneas de cuadrícula sutiles de fondo para estética arquitectónica -->
+		<div class="absolute inset-0 bg-[linear-gradient(to_right,#ffffff03_1px,transparent_1px),linear-gradient(to_bottom,#ffffff03_1px,transparent_1px)] bg-[size:100px_100px] pointer-events-none"></div>
+
+		<!-- 📌 NAVBAR MINIMALISTA -->
+		<nav class="sticky top-0 z-50 bg-sushi-black/80 backdrop-blur-md border-b border-white/5 gsap-nav">
+			<div class="flex justify-between items-center px-8 md:px-16 py-6 max-w-7xl mx-auto">
+				<!-- Logotipo -->
+				<a href="#" class="text-2xl font-bold tracking-[0.25em] text-sushi-white uppercase font-['Cinzel'] gsap-nav-logo transition-transform duration-300 hover:scale-105">
+					POLANCO'S<span class="text-sushi-red">.</span>
+				</a>
+				
+				<!-- Enlaces Desktop -->
+				<div class="hidden md:flex items-center space-x-12 text-xs uppercase tracking-[0.3em] font-medium">
+					<a href="https://yomenu.com.mx/polancos-roll-sushi" target="_blank" rel="noopener noreferrer" class="gsap-nav-item hover:text-sushi-red transition-colors duration-300 relative group py-2">
+						Menú
+						<span class="absolute bottom-0 left-0 w-0 h-[1px] bg-sushi-red transition-all duration-300 group-hover:w-full"></span>
+					</a>
+					<a href="#nosotros" class="gsap-nav-item hover:text-sushi-red transition-colors duration-300 relative group py-2">
+						Nosotros
+						<span class="absolute bottom-0 left-0 w-0 h-[1px] bg-sushi-red transition-all duration-300 group-hover:w-full"></span>
+					</a>
+					<a href="#reservar" class="gsap-nav-item hover:text-sushi-red transition-colors duration-300 relative group py-2">
+						Reservar
+						<span class="absolute bottom-0 left-0 w-0 h-[1px] bg-sushi-red transition-all duration-300 group-hover:w-full"></span>
+					</a>
+					<a href="#sucursales" class="gsap-nav-item gsap-btn bg-transparent border border-white/10 px-6 py-2.5 tracking-[0.3em]">
+						Sucursales
+					</a>
+				</div>
+
+				<!-- Botón Menú Mobile (Hamburger) -->
+				<button id="mobile-menu-btn" class="md:hidden flex flex-col justify-between w-6 h-4 focus:outline-none" aria-label="Abrir Menú">
+					<span class="w-full h-[1px] bg-sushi-white transition-transform duration-300"></span>
+					<span class="w-full h-[1px] bg-sushi-white transition-opacity duration-300"></span>
+					<span class="w-full h-[1px] bg-sushi-white transition-transform duration-300"></span>
+				</button>
+			</div>
+
+			<!-- Dropdown Mobile Menu -->
+			<div id="mobile-menu" class="hidden md:hidden absolute top-full left-0 w-full bg-sushi-black/95 border-b border-white/10 px-8 py-8 flex flex-col space-y-6 text-center text-sm uppercase tracking-widest">
+				<a href="https://yomenu.com.mx/polancos-roll-sushi" target="_blank" rel="noopener noreferrer" class="mobile-link py-2 hover:text-sushi-red transition-colors duration-300">Menú</a>
+				<a href="#nosotros" class="mobile-link py-2 hover:text-sushi-red transition-colors duration-300">Nosotros</a>
+				<a href="#reservar" class="mobile-link py-2 hover:text-sushi-red transition-colors duration-300">Reservar</a>
+				<a href="#sucursales" class="mobile-link py-3 bg-sushi-red text-sushi-white tracking-widest gsap-btn">Sucursales</a>
+			</div>
+		</nav>
+
+		<!-- 📌 HERO SECTION -->
+		<section class="relative flex flex-col lg:flex-row items-center justify-between px-8 md:px-16 py-16 lg:py-24 max-w-7xl mx-auto min-h-[85vh] gap-12">
+			
+			<!-- Texto Principal (Izquierda) -->
+			<div class="w-full lg:w-1/2 space-y-8 z-10 flex flex-col justify-center">
+				<div class="inline-flex items-center space-x-3 text-sushi-red">
+					<span class="w-8 h-[1px] bg-sushi-red"></span>
+					<span class="text-xs uppercase tracking-[0.4em] font-semibold font-mono">SUSHI ROLL</span>
+				</div>
+				<h1 class="text-4xl sm:text-5xl md:text-7xl font-extrabold tracking-tight leading-[1.05] uppercase font-['Cinzel'] gsap-hero-title">
+					<span class="block overflow-hidden py-1">
+						<span class="block hero-title-line">La Precisión</span>
+					</span>
+					<span class="block overflow-hidden py-1">
+						<span class="block hero-title-line text-transparent bg-clip-text bg-gradient-to-r from-sushi-white via-white to-neutral-600">Del Sabor,</span>
+					</span>
+					<span class="block overflow-hidden py-1">
+						<span class="block hero-title-line">Experiencia <span class="text-sushi-red">Premium</span></span>
+					</span>
+				</h1>
+				<p class="text-neutral-400 text-sm sm:text-base md:text-lg max-w-lg font-light leading-relaxed gsap-hero-desc opacity-0">
+					En Polanco's redefinimos el sushi de alta gama. Cada ingrediente es seleccionado por su frescura excepcional, logrando una combinación perfecta entre textura, temperatura y sabor.
+				</p>
+				<div class="pt-6 flex flex-col sm:flex-row gap-4 items-start sm:items-center gsap-hero-cta opacity-0">
+					<a href="#reservar" class="gsap-btn bg-sushi-red text-sushi-white font-semibold uppercase tracking-[0.2em] text-xs px-8 py-5 border border-sushi-red shadow-xl shadow-sushi-red/10 block text-center w-full sm:w-auto">
+						Reservar Mesa
+					</a>
+					<a href="https://yomenu.com.mx/polancos-roll-sushi" target="_blank" rel="noopener noreferrer" class="gsap-btn group flex items-center justify-center sm:justify-start space-x-3 font-semibold uppercase tracking-[0.2em] text-xs px-8 py-5 text-sushi-white w-full sm:w-auto">
+						<span>Ver Menú Completo</span>
+						<svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 transform group-hover:translate-x-2 transition-transform duration-300" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+							<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3" />
+						</svg>
+					</a>
+				</div>
+			</div>
+
+			<!-- Contenedor Interactivo de Rollo Firma (Derecha) -->
+			<div class="w-full lg:w-1/2 flex flex-col items-center justify-center relative gsap-hero-interactive">
+				<!-- Resplandor sutil trasero para foco visual -->
+				<div class="absolute w-72 h-72 md:w-96 md:h-96 bg-sushi-red/5 rounded-full blur-[80px] top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 -z-10"></div>
+				
+				<!-- Caja del Visualizador -->
+				<div class="w-full max-w-[480px] border border-white/5 bg-gradient-to-b from-white/[0.04] to-transparent p-8 md:p-10 backdrop-blur-md relative group transition-all duration-500 hover:border-white/10">
+					
+					<!-- Indicador de Esquina Minimalista -->
+					<div class="absolute top-4 left-4 font-mono text-[10px] text-neutral-500 tracking-[0.3em] uppercase">POLANCO'S LAB</div>
+					<div class="absolute top-4 right-4 font-mono text-[10px] text-sushi-red tracking-wider font-semibold" id="roll-number">01 / 04</div>
+
+					<!-- Contenedor del Visualizador de Imágenes Reales -->
+					<div class="w-full h-80 relative overflow-hidden my-6 border border-white/5 bg-neutral-950" id="sushi-display">
+						<img id="img-sushi-grenudo" src="images/grenudo.jpg" alt="Sushi Greñudo" class="absolute inset-0 w-full h-full object-cover transition-all duration-700 scale-100 opacity-100" />
+						<img id="img-sushi-san-andres" src="images/san_andres.jpg" alt="Sushi San Andres" class="absolute inset-0 w-full h-full object-cover transition-all duration-700 scale-95 opacity-0 hidden" />
+						<img id="img-sushi-avocado" src="images/avocado.jpg" alt="Sushi Avocado" class="absolute inset-0 w-full h-full object-cover transition-all duration-700 scale-95 opacity-0 hidden" />
+						<img id="img-sushi-tigre" src="images/tigre.jpg" alt="Sushi Tigre" class="absolute inset-0 w-full h-full object-cover transition-all duration-700 scale-95 opacity-0 hidden" />
+						<div class="absolute inset-0 bg-gradient-to-t from-sushi-black/70 via-transparent to-transparent"></div>
+					</div>
+
+					<!-- Datos del Plato Seleccionado -->
+					<div class="space-y-3 transition-opacity duration-300" id="roll-details-container">
+						<div class="flex justify-between items-baseline border-b border-white/5 pb-3">
+							<h3 class="text-xl font-bold uppercase tracking-wider font-['Cinzel'] text-sushi-white" id="roll-name">GREÑUDO</h3>
+							<span class="text-sushi-red font-mono font-bold text-lg" id="roll-price">$125</span>
+						</div>
+						<p class="text-neutral-400 text-xs leading-relaxed" id="roll-desc">
+							Philadelphia, Aguacate, Pepino, Surimi empanizado, coronado con ajonjolí y salsa de Anguila. Por fuera Surimi desmechado, aderezo Chipotle y cebollín.
+						</p>
+					</div>
+
+					<!-- Selector Interactivo (TABS - 4 Pestañas) -->
+					<div class="grid grid-cols-4 gap-2 mt-8 pt-6 border-t border-white/5">
+						<button data-index="0" class="roll-tab text-left group focus:outline-none">
+							<span class="block font-mono text-[9px] text-sushi-red font-bold">01.</span>
+							<span class="text-[10px] uppercase tracking-wider text-sushi-white font-medium group-hover:text-sushi-red transition-colors duration-300">GREÑUDO</span>
+							<span class="block h-[1px] bg-sushi-red w-full mt-1 transition-all duration-300"></span>
+						</button>
+						<button data-index="1" class="roll-tab text-left group opacity-40 focus:outline-none">
+							<span class="block font-mono text-[9px] text-neutral-500">02.</span>
+							<span class="text-[10px] uppercase tracking-wider text-neutral-400 group-hover:text-sushi-red transition-colors duration-300">SAN A.</span>
+							<span class="block h-[1px] bg-transparent w-0 mt-1 transition-all duration-300 group-hover:w-full group-hover:bg-sushi-red/40"></span>
+						</button>
+						<button data-index="2" class="roll-tab text-left group opacity-40 focus:outline-none">
+							<span class="block font-mono text-[9px] text-neutral-500">03.</span>
+							<span class="text-[10px] uppercase tracking-wider text-neutral-400 group-hover:text-sushi-red transition-colors duration-300">AVOCADO</span>
+							<span class="block h-[1px] bg-transparent w-0 mt-1 transition-all duration-300 group-hover:w-full group-hover:bg-sushi-red/40"></span>
+						</button>
+						<button data-index="3" class="roll-tab text-left group opacity-40 focus:outline-none">
+							<span class="block font-mono text-[9px] text-neutral-500">04.</span>
+							<span class="text-[10px] uppercase tracking-wider text-neutral-400 group-hover:text-sushi-red transition-colors duration-300">TIGRE</span>
+							<span class="block h-[1px] bg-transparent w-0 mt-1 transition-all duration-300 group-hover:w-full group-hover:bg-sushi-red/40"></span>
+						</button>
+					</div>
+
+				</div>
+			</div>
+
+		</section>
+
+		<!-- 📌 SECCIÓN DE NOSOTROS (ESPACIO NEGATIVO ABUNDANTE) -->
+		<section id="nosotros" class="py-28 md:py-40 bg-gradient-to-b from-transparent to-black/35 relative">
+			<div class="px-8 md:px-16 max-w-6xl mx-auto flex flex-col md:flex-row items-center gap-16">
+				<!-- Lado Izquierdo: Mensaje Estético Grande -->
+				<div class="w-full md:w-1/2 space-y-6">
+					<h3 class="text-3xl md:text-5xl font-light uppercase tracking-wide leading-tight font-['Cinzel'] text-neutral-300">
+						El Silencio <br/>
+						<span class="text-sushi-white font-extrabold">Precede al Sabor.</span>
+					</h3>
+					<div class="w-20 h-[2px] bg-sushi-red"></div>
+				</div>
+
+				<!-- Lado Derecho: Párrafos de Filosofía -->
+				<div class="w-full md:w-1/2 space-y-6 text-neutral-400 text-sm md:text-base font-light leading-relaxed">
+					<p>
+						No acumulamos condimentos. Seleccionamos un ingrediente protagonista de calidad insuperable y estructuramos el plato a su alrededor. El diseño arquitectónico de nuestras salas es reflejo de esta misma filosofía: limpieza y calma.
+					</p>
+					<p class="italic text-neutral-500 text-xs">
+						"Un buen plato de sushi no es aquel al que no queda nada que agregar, sino al que no queda nada por retirar."
+					</p>
+				</div>
+			</div>
+		</section>
+
+		<!-- 📌 SECCIÓN DE RESERVACIONES -->
+		<section id="reservar" class="py-24 border-t border-white/5 relative">
+			<div class="absolute inset-0 bg-[radial-gradient(#ffffff01_1px,transparent_1px)] bg-[size:32px_32px] pointer-events-none"></div>
+			
+			<div class="px-8 md:px-16 max-w-7xl mx-auto relative">
+				<div class="flex flex-col lg:flex-row gap-16 items-start">
+					
+					<!-- Columna Información (Izquierda) -->
+					<div class="w-full lg:w-5/12 space-y-8">
+						<div class="inline-flex items-center space-x-3 text-sushi-red">
+							<span class="w-8 h-[1px] bg-sushi-red"></span>
+							<span class="text-xs uppercase tracking-[0.4em] font-semibold font-mono">EXPERIENCIA</span>
+						</div>
+						<h2 class="text-3xl md:text-5xl font-extrabold uppercase tracking-wide font-['Cinzel'] gsap-booking-title">
+							<span class="inline-block overflow-hidden py-1">
+								<span class="inline-block booking-title-line">Asegura</span>
+							</span>
+							<span class="inline-block overflow-hidden py-1">
+								<span class="inline-block booking-title-line text-sushi-red">Tu Mesa</span>
+							</span>
+						</h2>
+						<div class="space-y-4 text-neutral-400 text-sm font-light leading-relaxed max-w-md">
+							<p>
+								Debido a nuestro aforo limitado y nuestra dedicación a la precisión en cada platillo, te recomendamos realizar tu reservación con anticipación.
+							</p>
+							<p>
+								Una vez completado el formulario, nuestro personal procesará tu solicitud y se pondrá en contacto contigo vía WhatsApp para confirmar tu espacio y coordinar cualquier preferencia especial.
+							</p>
+						</div>
+						
+						<!-- Detalles rápidos -->
+						<div class="pt-6 border-t border-white/5 space-y-4">
+							<div class="flex items-center space-x-4">
+								<div class="w-8 h-8 rounded-full border border-white/10 flex items-center justify-center text-sushi-red text-xs">✓</div>
+								<span class="text-xs text-neutral-300 font-light">Confirmación directa por WhatsApp</span>
+							</div>
+							<div class="flex items-center space-x-4">
+								<div class="w-8 h-8 rounded-full border border-white/10 flex items-center justify-center text-sushi-red text-xs">✓</div>
+								<span class="text-xs text-neutral-300 font-light">Sin costos de reservación</span>
+							</div>
+						</div>
+					</div>
+					
+					<!-- Columna Formulario (Derecha) -->
+					<div class="w-full lg:w-7/12 border border-white/5 bg-gradient-to-b from-white/[0.02] to-transparent p-8 md:p-12 backdrop-blur-md relative overflow-hidden">
+						
+						<!-- Banner de Feedback Visual -->
+						<div id="booking-feedback" class="absolute inset-0 bg-sushi-black/95 backdrop-blur-md flex flex-col items-center justify-center p-8 text-center hidden z-20 opacity-0">
+							<div class="w-16 h-16 border border-sushi-red/30 rounded-full flex items-center justify-center mb-6" id="feedback-icon-container">
+								<!-- Spinner animado para carga / Check para success -->
+								<div id="feedback-spinner" class="w-6 h-6 border-2 border-sushi-red border-t-transparent rounded-full animate-spin"></div>
+								<svg id="feedback-success-check" class="w-8 h-8 text-sushi-red hidden" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+									<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7" />
+								</svg>
+							</div>
+							<h3 class="text-xl font-bold uppercase tracking-wider font-['Cinzel'] text-sushi-white mb-3" id="feedback-title">Enviando...</h3>
+							<p class="text-neutral-400 text-sm max-w-sm font-light leading-relaxed" id="feedback-desc">
+								Procesando tu solicitud de reservación. Por favor espera.
+							</p>
+							<button id="feedback-btn" class="mt-8 gsap-btn border border-white/10 px-6 py-2.5 text-xs uppercase tracking-widest hover:border-sushi-red hover:text-sushi-red transition-colors duration-300 hidden">
+								Entendido
+							</button>
+						</div>
+						
+						<form id="booking-form" class="space-y-8">
+							<!-- Nombre completo -->
+							<div class="space-y-2">
+								<label for="booking-name" class="block text-[10px] uppercase tracking-[0.2em] text-neutral-500 font-mono">Nombre Completo</label>
+								<input 
+									type="text" 
+									name="name" 
+									id="booking-name" 
+									placeholder="Ej. Alejandro Polanco" 
+									required
+									class="bg-transparent border-b border-white/10 py-3 px-1 text-sushi-white placeholder:text-neutral-700 focus:outline-none focus:border-sushi-red focus:placeholder:text-neutral-600 transition-colors duration-300 w-full text-sm font-light"
+								/>
+							</div>
+							
+							<!-- WhatsApp / Teléfono -->
+							<div class="space-y-2">
+								<label for="booking-phone" class="block text-[10px] uppercase tracking-[0.2em] text-neutral-500 font-mono">WhatsApp / Teléfono</label>
+								<input 
+									type="tel" 
+									name="phone" 
+									id="booking-phone" 
+									placeholder="Ej. +52 667 123 4567" 
+									required
+									class="bg-transparent border-b border-white/10 py-3 px-1 text-sushi-white placeholder:text-neutral-700 focus:outline-none focus:border-sushi-red focus:placeholder:text-neutral-600 transition-colors duration-300 w-full text-sm font-light"
+								/>
+							</div>
+
+							<!-- Sucursal / Zona -->
+							<div class="space-y-2">
+								<label for="booking-zone" class="block text-[10px] uppercase tracking-[0.2em] text-neutral-500 font-mono">Sucursal / Zona</label>
+								<div class="relative">
+									<select 
+										name="zona" 
+										id="booking-zone" 
+										required
+										class="bg-transparent border-b border-white/10 py-3 px-1 text-sushi-white focus:outline-none focus:border-sushi-red transition-colors duration-300 w-full text-sm font-light appearance-none cursor-pointer"
+									>
+										<option value="" disabled selected class="bg-sushi-black text-neutral-500">Seleccionar sucursal</option>
+										<option value="Conquista" class="bg-sushi-black text-sushi-white">Conquista (Principal)</option>
+										<option value="Universitarios" class="bg-sushi-black text-sushi-white">Universitarios</option>
+										<option value="Valle Alto" class="bg-sushi-black text-sushi-white">Valle Alto</option>
+										<option value="Plaza Sendero" class="bg-sushi-black text-sushi-white">Plaza Sendero</option>
+									</select>
+									<!-- Custom Chevron Arrow -->
+									<div class="absolute inset-y-0 right-2 flex items-center pointer-events-none text-neutral-500">
+										<svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+											<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+										</svg>
+									</div>
+								</div>
+							</div>
+							
+							<!-- Grid de Fecha y Hora -->
+							<div class="grid grid-cols-1 sm:grid-cols-2 gap-8">
+								<!-- Fecha -->
+								<div class="space-y-2">
+									<label for="booking-date" class="block text-[10px] uppercase tracking-[0.2em] text-neutral-500 font-mono">Fecha</label>
+									<input 
+										type="date" 
+										name="date" 
+										id="booking-date" 
+										required
+										class="bg-transparent border-b border-white/10 py-3 px-1 text-sushi-white placeholder:text-neutral-700 focus:outline-none focus:border-sushi-red transition-colors duration-300 w-full text-sm font-light"
+									/>
+								</div>
+								<!-- Hora -->
+								<div class="space-y-2">
+									<label for="booking-time" class="block text-[10px] uppercase tracking-[0.2em] text-neutral-500 font-mono">Hora</label>
+									<input 
+										type="time" 
+										name="time" 
+										id="booking-time" 
+										required
+										class="bg-transparent border-b border-white/10 py-3 px-1 text-sushi-white placeholder:text-neutral-700 focus:outline-none focus:border-sushi-red transition-colors duration-300 w-full text-sm font-light"
+									/>
+								</div>
+							</div>
+							
+							<!-- Cantidad de personas -->
+							<div class="space-y-2">
+								<label for="booking-guests" class="block text-[10px] uppercase tracking-[0.2em] text-neutral-500 font-mono">Cantidad de personas</label>
+								<input 
+									type="number" 
+									name="guests" 
+									id="booking-guests" 
+									min="1" 
+									max="20"
+									placeholder="Ej. 4" 
+									required
+									class="bg-transparent border-b border-white/10 py-3 px-1 text-sushi-white placeholder:text-neutral-700 focus:outline-none focus:border-sushi-red focus:placeholder:text-neutral-600 transition-colors duration-300 w-full text-sm font-light"
+								/>
+							</div>
+							
+							<!-- Botón de Envío -->
+							<div class="pt-4">
+								<button 
+									type="submit" 
+									id="booking-submit-btn" 
+									class="gsap-btn w-full bg-sushi-red text-sushi-white font-semibold uppercase tracking-[0.2em] text-xs py-5 border border-sushi-red shadow-xl shadow-sushi-red/10 block text-center cursor-pointer"
+								>
+									Confirmar Reservación
+								</button>
+							</div>
+						</form>
+					</div>
+					
+				</div>
+			</div>
+		</section>
+
+		<!-- 📌 SECCIÓN DE SUCURSALES -->
+		<section id="sucursales" class="py-24 border-t border-white/5 relative bg-gradient-to-b from-transparent via-[#090909] to-sushi-black">
+			<div class="px-8 md:px-16 max-w-7xl mx-auto">
+				
+				<div class="space-y-4 mb-16 text-center md:text-left">
+					<div class="inline-flex items-center space-x-3 text-sushi-red">
+						<span class="w-8 h-[1px] bg-sushi-red"></span>
+						<span class="text-xs uppercase tracking-[0.4em] font-semibold font-mono">UBICACIONES</span>
+					</div>
+					<h2 class="text-3xl md:text-5xl font-extrabold uppercase tracking-wide font-['Cinzel'] gsap-branches-title">
+						<span class="inline-block overflow-hidden py-1">
+							<span class="inline-block branches-title-line">Nuestras</span>
+						</span>
+						<span class="inline-block overflow-hidden py-1">
+							<span class="inline-block branches-title-line text-sushi-red">Sucursales</span>
+						</span>
+					</h2>
+					<p class="text-neutral-400 text-sm max-w-lg font-light leading-relaxed">
+						Disfruta de la mejor experiencia de sushi premium en cualquiera de nuestros 4 puntos de Culiacán. Encuentra tu sucursal más cercana.
+					</p>
+				</div>
+
+				<!-- Grid de Sucursales (4 Columnas) -->
+				<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+					
+					<!-- Sucursal 1: Conquista -->
+					<div class="group border border-white/5 bg-gradient-to-b from-white/[0.02] to-transparent p-6 backdrop-blur-sm flex flex-col justify-between h-[360px] gsap-branch-card">
+						<div class="space-y-5">
+							<div class="flex justify-between items-start">
+								<h3 class="text-lg font-bold uppercase tracking-wider font-['Cinzel'] text-sushi-white group-hover:text-sushi-red transition-colors duration-300">Conquista</h3>
+								<span class="text-[9px] bg-sushi-red/10 text-sushi-red px-2 py-0.5 font-mono uppercase tracking-widest font-semibold">Principal</span>
+							</div>
+							
+							<div class="space-y-3 text-xs">
+								<div class="space-y-1">
+									<p class="text-neutral-500 font-mono text-[9px] uppercase tracking-wider">DIRECCIÓN</p>
+									<p class="text-neutral-300 leading-relaxed font-light">C. Universo 4802, El Acueducto, 80058 Culiacán Rosales, Sin.</p>
+								</div>
+								
+								<div class="space-y-1">
+									<p class="text-neutral-500 font-mono text-[9px] uppercase tracking-wider">HORARIO</p>
+									<p class="text-sushi-white font-mono font-medium">12:00 PM - 09:45 PM</p>
+								</div>
+							</div>
+						</div>
+						
+						<div class="pt-4 border-t border-white/5">
+							<a 
+								href="https://www.google.com/maps/place/Polanco%C2%B4S+Roll+Sushi/@24.8182432,-107.4456607,17z/data=!3m1!4b1!4m6!3m5!1s0x86bcdbad37af74e3:0x3ed199c584952300!8m2!3d24.8182384!4d-107.4430858!16s%2Fg%2F11ssxgdtbc?entry=ttu&g_ep=EgoyMDI2MDYxNi4wIKXMDSoASAFQAw%3D%3D" 
+								target="_blank" 
+								rel="noopener noreferrer" 
+								class="flex items-center justify-between text-[10px] uppercase tracking-widest text-neutral-400 group-hover:text-sushi-white transition-colors duration-300 font-semibold"
+							>
+								<span>Cómo llegar</span>
+								<svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 text-sushi-red group-hover:translate-x-1 transition-transform duration-300" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+									<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+								</svg>
+							</a>
+						</div>
+					</div>
+
+					<!-- Sucursal 2: Universitarios -->
+					<div class="group border border-white/5 bg-gradient-to-b from-white/[0.02] to-transparent p-6 backdrop-blur-sm flex flex-col justify-between h-[360px] gsap-branch-card">
+						<div class="space-y-5">
+							<div class="flex justify-between items-start">
+								<h3 class="text-lg font-bold uppercase tracking-wider font-['Cinzel'] text-sushi-white group-hover:text-sushi-red transition-colors duration-300">Universitarios</h3>
+							</div>
+							
+							<div class="space-y-3 text-xs">
+								<div class="space-y-1">
+									<p class="text-neutral-500 font-mono text-[9px] uppercase tracking-wider">DIRECCIÓN</p>
+									<p class="text-neutral-300 leading-relaxed font-light">Blvd. Universitarios 41, 80010 Culiacán Rosales, Sin.</p>
+								</div>
+								
+								<div class="space-y-1">
+									<p class="text-neutral-500 font-mono text-[9px] uppercase tracking-wider">HORARIO</p>
+									<p class="text-sushi-white font-mono font-medium">10:00 AM - 11:00 PM</p>
+								</div>
+							</div>
+						</div>
+						
+						<div class="pt-4 border-t border-white/5">
+							<a 
+								href="https://www.google.com/maps/place/Polanco's+Roll+Sushi/@24.8334314,-107.3961136,14z/data=!4m14!1m7!3m6!1s0x86bcdbad37af74e3:0x3ed199c584952300!2sPolanco%C2%B4S+Roll+Sushi!8m2!3d24.8182384!4d-107.4430858!16s%2Fg%2F11ssxgdtbc!3m5!1s0x86bcdb0073cd8f55:0xd76c72aaa93126b6!8m2!3d24.8334314!4d-107.3961136!16s%2Fg%2F11np_rwbrw?entry=ttu&g_ep=EgoyMDI2MDYxNi4wIKXMDSoASAFQAw%3D%3D" 
+								target="_blank" 
+								rel="noopener noreferrer" 
+								class="flex items-center justify-between text-[10px] uppercase tracking-widest text-neutral-400 group-hover:text-sushi-white transition-colors duration-300 font-semibold"
+							>
+								<span>Cómo llegar</span>
+								<svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 text-sushi-red group-hover:translate-x-1 transition-transform duration-300" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+									<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+								</svg>
+							</a>
+						</div>
+					</div>
+
+					<!-- Sucursal 3: Valle Alto -->
+					<div class="group border border-white/5 bg-gradient-to-b from-white/[0.02] to-transparent p-6 backdrop-blur-sm flex flex-col justify-between h-[360px] gsap-branch-card">
+						<div class="space-y-5">
+							<div class="flex justify-between items-start">
+								<h3 class="text-lg font-bold uppercase tracking-wider font-['Cinzel'] text-sushi-white group-hover:text-sushi-red transition-colors duration-300">Valle Alto</h3>
+							</div>
+							
+							<div class="space-y-3 text-xs">
+								<div class="space-y-1">
+									<p class="text-neutral-500 font-mono text-[9px] uppercase tracking-wider">DIRECCIÓN</p>
+									<p class="text-neutral-300 leading-relaxed font-light">C. Valle de la Rioja 4965, Valle Alto, 80050 Culiacán Rosales, Sin.</p>
+								</div>
+								
+								<div class="space-y-1">
+									<p class="text-neutral-500 font-mono text-[9px] uppercase tracking-wider">HORARIO</p>
+									<p class="text-sushi-white font-mono font-medium">12:00 PM - 09:45 PM</p>
+								</div>
+							</div>
+						</div>
+						
+						<div class="pt-4 border-t border-white/5">
+							<a 
+								href="https://www.google.com/maps/place/Polanco%E2%80%99s+Roll+Sushi/@24.8086111,-107.4662963,17z/data=!3m1!4b1!4m6!3m5!1s0x86bcdb004a0ea61d:0x41592c4c8e4b8bcc!8m2!3d24.8086063!4d-107.4637214!16s%2Fg%2F11w_rh32s2?entry=ttu&g_ep=EgoyMDI2MDYxNi4wIKXMDSoASAFQAw%3D%3D" 
+								target="_blank" 
+								rel="noopener noreferrer" 
+								class="flex items-center justify-between text-[10px] uppercase tracking-widest text-neutral-400 group-hover:text-sushi-white transition-colors duration-300 font-semibold"
+							>
+								<span>Cómo llegar</span>
+								<svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 text-sushi-red group-hover:translate-x-1 transition-transform duration-300" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+									<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+								</svg>
+							</a>
+						</div>
+					</div>
+
+					<!-- Sucursal 4: Plaza Sendero -->
+					<div class="group border border-white/5 bg-gradient-to-b from-white/[0.02] to-transparent p-6 backdrop-blur-sm flex flex-col justify-between h-[360px] gsap-branch-card">
+						<div class="space-y-5">
+							<div class="flex justify-between items-start">
+								<h3 class="text-lg font-bold uppercase tracking-wider font-['Cinzel'] text-sushi-white group-hover:text-sushi-red transition-colors duration-300">Plaza Sendero</h3>
+							</div>
+							
+							<div class="space-y-3 text-xs">
+								<div class="space-y-1">
+									<p class="text-neutral-500 font-mono text-[9px] uppercase tracking-wider">DIRECCIÓN</p>
+									<p class="text-neutral-300 leading-relaxed font-light">Área de Comida Plaza Sendero, Blvd. José Limón, Humaya No. 2545, 80020 Culiacán, Sin.</p>
+								</div>
+								
+								<div class="space-y-1">
+									<p class="text-neutral-500 font-mono text-[9px] uppercase tracking-wider">HORARIO</p>
+									<p class="text-sushi-white font-mono font-medium">10:00 AM - 09:00 PM</p>
+								</div>
+							</div>
+						</div>
+						
+						<div class="pt-4 border-t border-white/5">
+							<a 
+								href="https://www.google.com/maps/search/?api=1&query=Polanco's+Roll+Sushi+Plaza+Sendero+Culiac%C3%A1n" 
+								target="_blank" 
+								rel="noopener noreferrer" 
+								class="flex items-center justify-between text-[10px] uppercase tracking-widest text-neutral-400 group-hover:text-sushi-white transition-colors duration-300 font-semibold"
+							>
+								<span>Cómo llegar</span>
+								<svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 text-sushi-red group-hover:translate-x-1 transition-transform duration-300" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+									<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+								</svg>
+							</a>
+						</div>
+					</div>
+
+				</div>
+
+			</div>
+		</section>
+
+		<footer class="py-12 border-t border-white/5 bg-sushi-black">
+			<div class="px-8 md:px-16 max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-6">
+				<!-- Copyright -->
+				<span class="text-neutral-500 text-xs font-mono uppercase tracking-widest order-2 md:order-1">
+					© 2026 POLANCO'S. TODOS LOS DERECHOS RESERVADOS.
+				</span>
+				
+				<!-- Redes Sociales (Instagram) -->
+				<div class="flex items-center justify-center order-1 md:order-2">
+					<a 
+						href="https://www.instagram.com/polancos_roll/" 
+						target="_blank" 
+						rel="noopener noreferrer" 
+						aria-label="Instagram de Polanco's Roll"
+						class="text-neutral-500 hover:text-sushi-red hover:scale-110 hover:border-sushi-red/20 transition-all duration-300 p-3 border border-white/5 rounded-full bg-white/[0.01] flex items-center justify-center"
+					>
+						<svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round">
+							<rect x="2" y="2" width="20" height="20" rx="5" ry="5" />
+							<path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z" />
+							<line x1="17.5" y1="6.5" x2="17.51" y2="6.5" />
+						</svg>
+					</a>
+				</div>
+				
+				<!-- Leyenda del Maestro -->
+				<span class="text-neutral-600 text-[10px] tracking-[0.2em] uppercase font-mono italic order-3">
+					Hecho con precisión y calma
+				</span>
+			</div>
+		</footer>
+
+	</main>
+
+</body>
+</html>
