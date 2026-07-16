@@ -328,94 +328,98 @@ document.addEventListener('DOMContentLoaded', () => {
         });
 
         // Function to update constraints dynamically
-        const updateTimeConstraints = () => {
-            const selectedSucursal = sucursalSelect.value;
-            if (!selectedSucursal) return;
+        function updateTimeConstraints() {
+            try {
+                const selectedSucursal = sucursalSelect.value;
+                if (!selectedSucursal) return;
 
-            const horario = SUCURSALES_HORARIOS[selectedSucursal];
-            if (!horario) return;
+                const horario = SUCURSALES_HORARIOS[selectedSucursal];
+                if (!horario) return;
 
-            const now = new Date();
-            let minDate = new Date(now);
+                const now = new Date();
+                let minDate = new Date(now);
 
-            // Parse opening and closing hours
-            const [openHour, openMinute] = horario.open.split(':').map(Number);
-            const [closeHour, closeMinute] = horario.close.split(':').map(Number);
+                // Parse opening and closing hours
+                const [openHour, openMinute] = horario.open.split(':').map(Number);
+                const [closeHour, closeMinute] = horario.close.split(':').map(Number);
 
-            const currentHour = now.getHours();
-            const currentMinute = now.getMinutes();
+                const currentHour = now.getHours();
+                const currentMinute = now.getMinutes();
 
-            const isPastClosingToday = (currentHour > closeHour) || (currentHour === closeHour && currentMinute >= closeMinute);
+                const isPastClosingToday = (currentHour > closeHour) || (currentHour === closeHour && currentMinute >= closeMinute);
 
-            // If past closing today, reservations start tomorrow
-            if (isPastClosingToday) {
-                minDate.setDate(minDate.getDate() + 1);
+                // If past closing today, reservations start tomorrow
+                if (isPastClosingToday) {
+                    minDate.setDate(minDate.getDate() + 1);
+                }
+
+                // Max date: 1 week from min date
+                const maxDate = new Date(minDate);
+                maxDate.setDate(maxDate.getDate() + 7);
+
+                const formatDate = (d) => {
+                    const year = d.getFullYear();
+                    const month = String(d.getMonth() + 1).padStart(2, '0');
+                    const day = String(d.getDate()).padStart(2, '0');
+                    return `${year}-${month}-${day}`;
+                };
+
+                const minDateString = formatDate(minDate);
+                bookingDateInput.min = minDateString;
+                bookingDateInput.max = formatDate(maxDate);
+
+                // Default or adjust date value if out of bounds
+                if (!bookingDateInput.value || bookingDateInput.value < minDateString || bookingDateInput.value > bookingDateInput.max) {
+                    bookingDateInput.value = minDateString;
+                }
+
+                // Clear current options inside bookingTimeInput (except the first default one)
+                bookingTimeInput.innerHTML = '<option value="" disabled selected class="bg-sushi-black text-neutral-500">Seleccionar hora</option>';
+
+                const selectedDate = bookingDateInput.value;
+                const todayString = formatDate(now);
+
+                // Determine starting and ending hour
+                let startHour = openHour;
+                
+                const decimalClose = closeHour + (closeMinute / 60);
+                const endHour = Math.floor(decimalClose - 1); // 1 hour before closing
+
+                if (selectedDate === todayString) {
+                    // If today, start hour must be at least currentHour + 1 to prevent booking in the past
+                    startHour = Math.max(openHour, currentHour + 1);
+                }
+
+                const get12HourLabel = (h) => {
+                    const ampm = h >= 12 ? 'PM' : 'AM';
+                    let displayHour = h % 12;
+                    displayHour = displayHour ? displayHour : 12; // 0 hour should be 12
+                    return `${displayHour}:00 ${ampm}`;
+                };
+
+                // Populate the dropdown with hourly options
+                let slotsAvailable = false;
+                for (let h = startHour; h <= endHour; h++) {
+                    const option = document.createElement('option');
+                    option.value = `${String(h).padStart(2, '0')}:00`;
+                    option.textContent = get12HourLabel(h);
+                    option.className = "bg-sushi-black text-sushi-white";
+                    bookingTimeInput.appendChild(option);
+                    slotsAvailable = true;
+                }
+
+                if (!slotsAvailable) {
+                    const option = document.createElement('option');
+                    option.value = "";
+                    option.textContent = "No hay horarios disponibles hoy";
+                    option.disabled = true;
+                    option.className = "bg-sushi-black text-neutral-500";
+                    bookingTimeInput.appendChild(option);
+                }
+            } catch (err) {
+                console.error("Error in updateTimeConstraints:", err);
             }
-
-            // Max date: 1 week from min date
-            const maxDate = new Date(minDate);
-            maxDate.setDate(maxDate.getDate() + 7);
-
-            const formatDate = (d) => {
-                const year = d.getFullYear();
-                const month = String(d.getMonth() + 1).padStart(2, '0');
-                const day = String(d.getDate()).padStart(2, '0');
-                return `${year}-${month}-${day}`;
-            };
-
-            const minDateString = formatDate(minDate);
-            bookingDateInput.min = minDateString;
-            bookingDateInput.max = formatDate(maxDate);
-
-            // Default or adjust date value if out of bounds
-            if (!bookingDateInput.value || bookingDateInput.value < minDateString || bookingDateInput.value > bookingDateInput.max) {
-                bookingDateInput.value = minDateString;
-            }
-
-            // Clear current options inside bookingTimeInput (except the first default one)
-            bookingTimeInput.innerHTML = '<option value="" disabled selected class="bg-sushi-black text-neutral-500">Seleccionar hora</option>';
-
-            const selectedDate = bookingDateInput.value;
-            const todayString = formatDate(now);
-
-            // Determine starting and ending hour
-            let startHour = openHour;
-            
-            const decimalClose = closeHour + (closeMinute / 60);
-            const endHour = Math.floor(decimalClose - 1); // 1 hour before closing
-
-            if (selectedDate === todayString) {
-                // If today, start hour must be at least currentHour + 1 to prevent booking in the past
-                startHour = Math.max(openHour, currentHour + 1);
-            }
-
-            const get12HourLabel = (h) => {
-                const ampm = h >= 12 ? 'PM' : 'AM';
-                let displayHour = h % 12;
-                displayHour = displayHour ? displayHour : 12; // 0 hour should be 12
-                return `${displayHour}:00 ${ampm}`;
-            };
-
-            // Populate the dropdown with hourly options
-            let slotsAvailable = false;
-            for (let h = startHour; h <= endHour; h++) {
-                const option = document.createElement('option');
-                option.value = `${String(h).padStart(2, '0')}:00`;
-                option.textContent = get12HourLabel(h);
-                option.className = "bg-sushi-black text-sushi-white";
-                bookingTimeInput.appendChild(option);
-                slotsAvailable = true;
-            }
-
-            if (!slotsAvailable) {
-                const option = document.createElement('option');
-                option.value = "";
-                option.textContent = "No hay horarios disponibles hoy";
-                option.disabled = true;
-                option.className = "bg-sushi-black text-neutral-500";
-                bookingTimeInput.appendChild(option);
-            }
-        };
+        }
 
         bookingDateInput.addEventListener('change', updateTimeConstraints);
 
