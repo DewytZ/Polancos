@@ -372,35 +372,48 @@ document.addEventListener('DOMContentLoaded', () => {
                 bookingDateInput.value = minDateString;
             }
 
-            // Update time inputs min and max
+            // Clear current options inside bookingTimeInput (except the first default one)
+            bookingTimeInput.innerHTML = '<option value="" disabled selected class="bg-sushi-black text-neutral-500">Seleccionar hora</option>';
+
             const selectedDate = bookingDateInput.value;
             const todayString = formatDate(now);
 
+            // Determine starting and ending hour
+            let startHour = openHour;
+            
+            const decimalClose = closeHour + (closeMinute / 60);
+            const endHour = Math.floor(decimalClose - 1); // 1 hour before closing
+
             if (selectedDate === todayString) {
-                // Same day: min is current hour/minute OR opening hour (whichever is later)
-                let minHour = currentHour;
-                let minMinute = currentMinute;
+                // If today, start hour must be at least currentHour + 1 to prevent booking in the past
+                startHour = Math.max(openHour, currentHour + 1);
+            }
 
-                if (minHour < openHour || (minHour === openHour && minMinute < openMinute)) {
-                    minHour = openHour;
-                    minMinute = openMinute;
-                }
+            const get12HourLabel = (h) => {
+                const ampm = h >= 12 ? 'PM' : 'AM';
+                let displayHour = h % 12;
+                displayHour = displayHour ? displayHour : 12; // 0 hour should be 12
+                return `${displayHour}:00 ${ampm}`;
+            };
 
-                const minTimeStr = `${String(minHour).padStart(2, '0')}:${String(minMinute).padStart(2, '0')}`;
-                bookingTimeInput.min = minTimeStr;
-                bookingTimeInput.max = horario.close;
+            // Populate the dropdown with hourly options
+            let slotsAvailable = false;
+            for (let h = startHour; h <= endHour; h++) {
+                const option = document.createElement('option');
+                option.value = `${String(h).padStart(2, '0')}:00`;
+                option.textContent = get12HourLabel(h);
+                option.className = "bg-sushi-black text-sushi-white";
+                bookingTimeInput.appendChild(option);
+                slotsAvailable = true;
+            }
 
-                if (bookingTimeInput.value && (bookingTimeInput.value < minTimeStr || bookingTimeInput.value > horario.close)) {
-                    bookingTimeInput.value = minTimeStr;
-                }
-            } else {
-                // Future days: min is opening hour, max is closing hour
-                bookingTimeInput.min = horario.open;
-                bookingTimeInput.max = horario.close;
-
-                if (bookingTimeInput.value && (bookingTimeInput.value < horario.open || bookingTimeInput.value > horario.close)) {
-                    bookingTimeInput.value = horario.open;
-                }
+            if (!slotsAvailable) {
+                const option = document.createElement('option');
+                option.value = "";
+                option.textContent = "No hay horarios disponibles hoy";
+                option.disabled = true;
+                option.className = "bg-sushi-black text-neutral-500";
+                bookingTimeInput.appendChild(option);
             }
         };
 

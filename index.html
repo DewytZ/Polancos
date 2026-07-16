@@ -354,14 +354,23 @@
 								<!-- Hora -->
 								<div class="space-y-2">
 									<label for="hora" class="block text-[10px] uppercase tracking-[0.2em] text-neutral-500 font-mono">Hora</label>
-									<input 
-										type="time" 
-										name="hora" 
-										id="hora" 
-										required
-										disabled
-										class="bg-transparent border-b border-white/10 py-3 px-1 text-sushi-white placeholder:text-neutral-700 focus:outline-none focus:border-sushi-red transition-colors duration-300 w-full text-sm font-light disabled:opacity-40 disabled:cursor-not-allowed"
-									/>
+									<div class="relative">
+										<select 
+											name="hora" 
+											id="hora" 
+											required
+											disabled
+											class="bg-transparent border-b border-white/10 py-3 px-1 text-sushi-white focus:outline-none focus:border-sushi-red transition-colors duration-300 w-full text-sm font-light appearance-none cursor-pointer disabled:opacity-40 disabled:cursor-not-allowed"
+										>
+											<option value="" disabled selected class="bg-sushi-black text-neutral-500">Seleccionar hora</option>
+										</select>
+										<!-- Custom Chevron Arrow -->
+										<div class="absolute inset-y-0 right-2 flex items-center pointer-events-none text-neutral-500">
+											<svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+												<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+											</svg>
+										</div>
+									</div>
 								</div>
 							</div>
 							
