@@ -307,8 +307,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const SUCURSALES_HORARIOS = {
         "Conquista": { open: "12:00", close: "21:45", label: "12:00 PM - 09:45 PM" },
         "Universitarios": { open: "10:00", close: "23:00", label: "10:00 AM - 11:00 PM" },
-        "Valle Alto": { open: "12:00", close: "21:45", label: "12:00 PM - 09:45 PM" },
-        "Plaza Sendero": { open: "10:00", close: "21:00", label: "10:00 AM - 09:00 PM" }
+        "Valle Alto": { open: "12:00", close: "21:45", label: "12:00 PM - 09:45 PM" }
     };
 
     if (sucursalSelect && bookingDateInput && bookingTimeInput) {
