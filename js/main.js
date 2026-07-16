@@ -300,62 +300,110 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     // 7. Dynamic Date and Time Constraints for Booking Form
-    const bookingDateInput = document.getElementById('booking-date');
-    const bookingTimeInput = document.getElementById('booking-time');
+    const sucursalSelect = document.getElementById('sucursal');
+    const bookingDateInput = document.getElementById('fecha');
+    const bookingTimeInput = document.getElementById('hora');
 
-    if (bookingDateInput && bookingTimeInput) {
-        const now = new Date();
-        let minDate = new Date(now);
-        
-        // If after 23:00 (11 PM), reservations start tomorrow
-        if (now.getHours() >= 23) {
-            minDate.setDate(minDate.getDate() + 1);
-        }
-        
-        // Max date: 1 week from min date
-        const maxDate = new Date(minDate);
-        maxDate.setDate(maxDate.getDate() + 7);
+    const SUCURSALES_HORARIOS = {
+        "Conquista": { open: "12:00", close: "21:45", label: "12:00 PM - 09:45 PM" },
+        "Universitarios": { open: "10:00", close: "23:00", label: "10:00 AM - 11:00 PM" },
+        "Valle Alto": { open: "12:00", close: "21:45", label: "12:00 PM - 09:45 PM" },
+        "Plaza Sendero": { open: "10:00", close: "21:00", label: "10:00 AM - 09:00 PM" }
+    };
 
-        const formatDate = (d) => {
-            const year = d.getFullYear();
-            const month = String(d.getMonth() + 1).padStart(2, '0');
-            const day = String(d.getDate()).padStart(2, '0');
-            return `${year}-${month}-${day}`;
-        };
+    if (sucursalSelect && bookingDateInput && bookingTimeInput) {
+        // Enable fields on sucursal change
+        sucursalSelect.addEventListener('change', () => {
+            const selectedSucursal = sucursalSelect.value;
+            if (selectedSucursal) {
+                bookingDateInput.disabled = false;
+                bookingTimeInput.disabled = false;
+                updateTimeConstraints();
+            } else {
+                bookingDateInput.disabled = true;
+                bookingTimeInput.disabled = true;
+                bookingDateInput.value = "";
+                bookingTimeInput.value = "";
+            }
+        });
 
-        const todayString = formatDate(minDate);
-        bookingDateInput.min = todayString;
-        bookingDateInput.max = formatDate(maxDate);
-
-        // Set default to min date
-        bookingDateInput.value = todayString;
-
-        // Function to update time constraints dynamically
+        // Function to update constraints dynamically
         const updateTimeConstraints = () => {
-            const selectedDate = bookingDateInput.value;
-            const currentDateStr = formatDate(new Date());
+            const selectedSucursal = sucursalSelect.value;
+            if (!selectedSucursal) return;
 
-            if (selectedDate === currentDateStr) {
-                // Same day: min is current hour/minute, max is 23:00
-                const currentHours = String(now.getHours()).padStart(2, '0');
-                const currentMinutes = String(now.getMinutes()).padStart(2, '0');
-                const minTime = `${currentHours}:${currentMinutes}`;
-                
-                bookingTimeInput.min = minTime;
-                bookingTimeInput.max = "23:00";
-                
-                if (bookingTimeInput.value && (bookingTimeInput.value < minTime || bookingTimeInput.value > "23:00")) {
-                    bookingTimeInput.value = minTime;
+            const horario = SUCURSALES_HORARIOS[selectedSucursal];
+            if (!horario) return;
+
+            const now = new Date();
+            let minDate = new Date(now);
+
+            // Parse opening and closing hours
+            const [openHour, openMinute] = horario.open.split(':').map(Number);
+            const [closeHour, closeMinute] = horario.close.split(':').map(Number);
+
+            const currentHour = now.getHours();
+            const currentMinute = now.getMinutes();
+
+            const isPastClosingToday = (currentHour > closeHour) || (currentHour === closeHour && currentMinute >= closeMinute);
+
+            // If past closing today, reservations start tomorrow
+            if (isPastClosingToday) {
+                minDate.setDate(minDate.getDate() + 1);
+            }
+
+            // Max date: 1 week from min date
+            const maxDate = new Date(minDate);
+            maxDate.setDate(maxDate.getDate() + 7);
+
+            const formatDate = (d) => {
+                const year = d.getFullYear();
+                const month = String(d.getMonth() + 1).padStart(2, '0');
+                const day = String(d.getDate()).padStart(2, '0');
+                return `${year}-${month}-${day}`;
+            };
+
+            const minDateString = formatDate(minDate);
+            bookingDateInput.min = minDateString;
+            bookingDateInput.max = formatDate(maxDate);
+
+            // Default or adjust date value if out of bounds
+            if (!bookingDateInput.value || bookingDateInput.value < minDateString || bookingDateInput.value > bookingDateInput.max) {
+                bookingDateInput.value = minDateString;
+            }
+
+            // Update time inputs min and max
+            const selectedDate = bookingDateInput.value;
+            const todayString = formatDate(now);
+
+            if (selectedDate === todayString) {
+                // Same day: min is current hour/minute OR opening hour (whichever is later)
+                let minHour = currentHour;
+                let minMinute = currentMinute;
+
+                if (minHour < openHour || (minHour === openHour && minMinute < openMinute)) {
+                    minHour = openHour;
+                    minMinute = openMinute;
+                }
+
+                const minTimeStr = `${String(minHour).padStart(2, '0')}:${String(minMinute).padStart(2, '0')}`;
+                bookingTimeInput.min = minTimeStr;
+                bookingTimeInput.max = horario.close;
+
+                if (bookingTimeInput.value && (bookingTimeInput.value < minTimeStr || bookingTimeInput.value > horario.close)) {
+                    bookingTimeInput.value = minTimeStr;
                 }
             } else {
-                // Future days: min is opening hour (10:00 AM), max is 11:00 PM
-                bookingTimeInput.min = "10:00";
-                bookingTimeInput.max = "23:00";
+                // Future days: min is opening hour, max is closing hour
+                bookingTimeInput.min = horario.open;
+                bookingTimeInput.max = horario.close;
+
+                if (bookingTimeInput.value && (bookingTimeInput.value < horario.open || bookingTimeInput.value > horario.close)) {
+                    bookingTimeInput.value = horario.open;
+                }
             }
         };
 
-        // Initialize and listen to changes
-        updateTimeConstraints();
         bookingDateInput.addEventListener('change', updateTimeConstraints);
 
         // 8. Booking Form Submission Logic
@@ -384,12 +432,12 @@ document.addEventListener('DOMContentLoaded', () => {
                 // Collect input values using Spanish keys to match GAS properties
                 const formData = new FormData(bookingForm);
                 const data = {
-                    nombre: formData.get('name'),
-                    whatsapp: formData.get('phone'),
-                    fecha: formData.get('date'),
-                    hora: formData.get('time'),
-                    personas: formData.get('guests'),
-                    zona: formData.get('zona')
+                    nombre: formData.get('nombre'),
+                    whatsapp: formData.get('whatsapp'),
+                    fecha: formData.get('fecha'),
+                    hora: formData.get('hora'),
+                    personas: formData.get('personas'),
+                    sucursal: formData.get('sucursal')
                 };
 
                 const ENDPOINT_URL = 'https://script.google.com/macros/s/AKfycbzJq_F1uu0DfTBRvMSJBLxk0bwE6_mWeuV_KiKXl6Tr0GxayD4nt6FoxKtGZCRRI_NnUg/exec';
@@ -429,7 +477,8 @@ document.addEventListener('DOMContentLoaded', () => {
                                     onComplete: () => {
                                         bookingFeedback.classList.add('hidden');
                                         bookingForm.reset();
-                                        updateTimeConstraints();
+                                        bookingDateInput.disabled = true;
+                                        bookingTimeInput.disabled = true;
                                     }
                                 });
                             };

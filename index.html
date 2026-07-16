@@ -286,39 +286,13 @@
 						</div>
 						
 						<form id="booking-form" class="space-y-8">
-							<!-- Nombre completo -->
+							<!-- Sucursal -->
 							<div class="space-y-2">
-								<label for="booking-name" class="block text-[10px] uppercase tracking-[0.2em] text-neutral-500 font-mono">Nombre Completo</label>
-								<input 
-									type="text" 
-									name="name" 
-									id="booking-name" 
-									placeholder="Ej. Alejandro Polanco" 
-									required
-									class="bg-transparent border-b border-white/10 py-3 px-1 text-sushi-white placeholder:text-neutral-700 focus:outline-none focus:border-sushi-red focus:placeholder:text-neutral-600 transition-colors duration-300 w-full text-sm font-light"
-								/>
-							</div>
-							
-							<!-- WhatsApp / Teléfono -->
-							<div class="space-y-2">
-								<label for="booking-phone" class="block text-[10px] uppercase tracking-[0.2em] text-neutral-500 font-mono">WhatsApp / Teléfono</label>
-								<input 
-									type="tel" 
-									name="phone" 
-									id="booking-phone" 
-									placeholder="Ej. +52 667 123 4567" 
-									required
-									class="bg-transparent border-b border-white/10 py-3 px-1 text-sushi-white placeholder:text-neutral-700 focus:outline-none focus:border-sushi-red focus:placeholder:text-neutral-600 transition-colors duration-300 w-full text-sm font-light"
-								/>
-							</div>
-
-							<!-- Sucursal / Zona -->
-							<div class="space-y-2">
-								<label for="booking-zone" class="block text-[10px] uppercase tracking-[0.2em] text-neutral-500 font-mono">Sucursal / Zona</label>
+								<label for="sucursal" class="block text-[10px] uppercase tracking-[0.2em] text-neutral-500 font-mono">Sucursal</label>
 								<div class="relative">
 									<select 
-										name="zona" 
-										id="booking-zone" 
+										name="sucursal" 
+										id="sucursal" 
 										required
 										class="bg-transparent border-b border-white/10 py-3 px-1 text-sushi-white focus:outline-none focus:border-sushi-red transition-colors duration-300 w-full text-sm font-light appearance-none cursor-pointer"
 									>
@@ -336,40 +310,68 @@
 									</div>
 								</div>
 							</div>
+
+							<!-- Nombre completo -->
+							<div class="space-y-2">
+								<label for="nombre" class="block text-[10px] uppercase tracking-[0.2em] text-neutral-500 font-mono">Nombre Completo</label>
+								<input 
+									type="text" 
+									name="nombre" 
+									id="nombre" 
+									placeholder="Ej. Alejandro Polanco" 
+									required
+									class="bg-transparent border-b border-white/10 py-3 px-1 text-sushi-white placeholder:text-neutral-700 focus:outline-none focus:border-sushi-red focus:placeholder:text-neutral-600 transition-colors duration-300 w-full text-sm font-light"
+								/>
+							</div>
+							
+							<!-- WhatsApp / Teléfono -->
+							<div class="space-y-2">
+								<label for="whatsapp" class="block text-[10px] uppercase tracking-[0.2em] text-neutral-500 font-mono">WhatsApp / Teléfono</label>
+								<input 
+									type="tel" 
+									name="whatsapp" 
+									id="whatsapp" 
+									placeholder="Ej. +52 667 123 4567" 
+									required
+									class="bg-transparent border-b border-white/10 py-3 px-1 text-sushi-white placeholder:text-neutral-700 focus:outline-none focus:border-sushi-red focus:placeholder:text-neutral-600 transition-colors duration-300 w-full text-sm font-light"
+								/>
+							</div>
 							
 							<!-- Grid de Fecha y Hora -->
 							<div class="grid grid-cols-1 sm:grid-cols-2 gap-8">
 								<!-- Fecha -->
 								<div class="space-y-2">
-									<label for="booking-date" class="block text-[10px] uppercase tracking-[0.2em] text-neutral-500 font-mono">Fecha</label>
+									<label for="fecha" class="block text-[10px] uppercase tracking-[0.2em] text-neutral-500 font-mono">Fecha</label>
 									<input 
 										type="date" 
-										name="date" 
-										id="booking-date" 
+										name="fecha" 
+										id="fecha" 
 										required
-										class="bg-transparent border-b border-white/10 py-3 px-1 text-sushi-white placeholder:text-neutral-700 focus:outline-none focus:border-sushi-red transition-colors duration-300 w-full text-sm font-light"
+										disabled
+										class="bg-transparent border-b border-white/10 py-3 px-1 text-sushi-white placeholder:text-neutral-700 focus:outline-none focus:border-sushi-red transition-colors duration-300 w-full text-sm font-light disabled:opacity-40 disabled:cursor-not-allowed"
 									/>
 								</div>
 								<!-- Hora -->
 								<div class="space-y-2">
-									<label for="booking-time" class="block text-[10px] uppercase tracking-[0.2em] text-neutral-500 font-mono">Hora</label>
+									<label for="hora" class="block text-[10px] uppercase tracking-[0.2em] text-neutral-500 font-mono">Hora</label>
 									<input 
 										type="time" 
-										name="time" 
-										id="booking-time" 
+										name="hora" 
+										id="hora" 
 										required
-										class="bg-transparent border-b border-white/10 py-3 px-1 text-sushi-white placeholder:text-neutral-700 focus:outline-none focus:border-sushi-red transition-colors duration-300 w-full text-sm font-light"
+										disabled
+										class="bg-transparent border-b border-white/10 py-3 px-1 text-sushi-white placeholder:text-neutral-700 focus:outline-none focus:border-sushi-red transition-colors duration-300 w-full text-sm font-light disabled:opacity-40 disabled:cursor-not-allowed"
 									/>
 								</div>
 							</div>
 							
 							<!-- Cantidad de personas -->
 							<div class="space-y-2">
-								<label for="booking-guests" class="block text-[10px] uppercase tracking-[0.2em] text-neutral-500 font-mono">Cantidad de personas</label>
+								<label for="personas" class="block text-[10px] uppercase tracking-[0.2em] text-neutral-500 font-mono">Cantidad de personas</label>
 								<input 
 									type="number" 
-									name="guests" 
-									id="booking-guests" 
+									name="personas" 
+									id="personas" 
 									min="1" 
 									max="20"
 									placeholder="Ej. 4" 
