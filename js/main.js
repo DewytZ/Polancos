@@ -456,7 +456,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     sucursal: formData.get('sucursal')
                 };
 
-                const ENDPOINT_URL = 'https://script.google.com/macros/s/AKfycbzJq_F1uu0DfTBRvMSJBLxk0bwE6_mWeuV_KiKXl6Tr0GxayD4nt6FoxKtGZCRRI_NnUg/exec';
+                const ENDPOINT_URL = 'https://script.google.com/macros/s/AKfycbyyMLqscU4d3mdHAH_Zmt2SaSUzDNy-C68Ue-_frYznxCYvZI1yM6ko4R9cEqUNmxdBdQ/exec';
 
                 try {
                     let response;
