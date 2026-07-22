@@ -297,7 +297,7 @@
 										class="bg-transparent border-b border-white/10 py-3 px-1 text-sushi-white focus:outline-none focus:border-sushi-red transition-colors duration-300 w-full text-sm font-light appearance-none cursor-pointer"
 									>
 										<option value="" disabled selected class="bg-sushi-black text-neutral-500">Seleccionar sucursal</option>
-										<option value="Conquista" class="bg-sushi-black text-sushi-white">Conquista (Principal)</option>
+										<option value="Conquista" class="bg-sushi-black text-sushi-white">Conquista</option>
 										<option value="Universitarios" class="bg-sushi-black text-sushi-white">Universitarios</option>
 										<option value="Valle Alto" class="bg-sushi-black text-sushi-white">Valle Alto</option>
 									</select>
@@ -427,11 +427,11 @@
 					</p>
 				</div>
 
-				<!-- Grid de Sucursales (4 Columnas) -->
-				<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+				<!-- Grid de Sucursales (4 Columnas / Carrusel en móvil) -->
+				<div class="flex overflow-x-auto [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none] snap-x snap-mandatory gap-6 pb-6 md:pb-0 md:grid md:grid-cols-2 lg:grid-cols-4 md:gap-6">
 					
 					<!-- Sucursal 1: Conquista -->
-					<div class="group border border-white/5 bg-gradient-to-b from-white/[0.02] to-transparent p-6 backdrop-blur-sm flex flex-col justify-between h-[360px] gsap-branch-card">
+					<div class="w-[85vw] xs:w-[300px] sm:w-[320px] md:w-auto shrink-0 snap-start group border border-white/5 bg-gradient-to-b from-white/[0.02] to-transparent p-6 backdrop-blur-sm flex flex-col justify-between h-[360px] gsap-branch-card">
 						<div class="space-y-5">
 							<div class="flex justify-between items-start">
 								<h3 class="text-lg font-bold uppercase tracking-wider font-['Cinzel'] text-sushi-white group-hover:text-sushi-red transition-colors duration-300">Conquista</h3>
@@ -467,7 +467,7 @@
 					</div>
 
 					<!-- Sucursal 2: Universitarios -->
-					<div class="group border border-white/5 bg-gradient-to-b from-white/[0.02] to-transparent p-6 backdrop-blur-sm flex flex-col justify-between h-[360px] gsap-branch-card">
+					<div class="w-[85vw] xs:w-[300px] sm:w-[320px] md:w-auto shrink-0 snap-start group border border-white/5 bg-gradient-to-b from-white/[0.02] to-transparent p-6 backdrop-blur-sm flex flex-col justify-between h-[360px] gsap-branch-card">
 						<div class="space-y-5">
 							<div class="flex justify-between items-start">
 								<h3 class="text-lg font-bold uppercase tracking-wider font-['Cinzel'] text-sushi-white group-hover:text-sushi-red transition-colors duration-300">Universitarios</h3>
@@ -502,7 +502,7 @@
 					</div>
 
 					<!-- Sucursal 3: Valle Alto -->
-					<div class="group border border-white/5 bg-gradient-to-b from-white/[0.02] to-transparent p-6 backdrop-blur-sm flex flex-col justify-between h-[360px] gsap-branch-card">
+					<div class="w-[85vw] xs:w-[300px] sm:w-[320px] md:w-auto shrink-0 snap-start group border border-white/5 bg-gradient-to-b from-white/[0.02] to-transparent p-6 backdrop-blur-sm flex flex-col justify-between h-[360px] gsap-branch-card">
 						<div class="space-y-5">
 							<div class="flex justify-between items-start">
 								<h3 class="text-lg font-bold uppercase tracking-wider font-['Cinzel'] text-sushi-white group-hover:text-sushi-red transition-colors duration-300">Valle Alto</h3>
@@ -537,7 +537,7 @@
 					</div>
 
 					<!-- Sucursal 4: Plaza Sendero -->
-					<div class="group border border-white/5 bg-gradient-to-b from-white/[0.02] to-transparent p-6 backdrop-blur-sm flex flex-col justify-between h-[360px] gsap-branch-card">
+					<div class="w-[85vw] xs:w-[300px] sm:w-[320px] md:w-auto shrink-0 snap-start group border border-white/5 bg-gradient-to-b from-white/[0.02] to-transparent p-6 backdrop-blur-sm flex flex-col justify-between h-[360px] gsap-branch-card">
 						<div class="space-y-5">
 							<div class="flex justify-between items-start">
 								<h3 class="text-lg font-bold uppercase tracking-wider font-['Cinzel'] text-sushi-white group-hover:text-sushi-red transition-colors duration-300">Plaza Sendero</h3>
