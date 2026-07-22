@@ -441,8 +441,8 @@ document.addEventListener('DOMContentLoaded', () => {
                 
                 if (feedbackSpinner) feedbackSpinner.classList.remove('hidden');
                 if (feedbackSuccessCheck) feedbackSuccessCheck.classList.add('hidden');
-                if (feedbackTitle) feedbackTitle.textContent = 'Enviando...';
-                if (feedbackDesc) feedbackDesc.textContent = 'Procesando tu solicitud de reservación. Por favor espera.';
+                if (feedbackTitle) feedbackTitle.textContent = 'Verificando Disponibilidad...';
+                if (feedbackDesc) feedbackDesc.textContent = 'Comprobando aforo y registrando tu reservación. Por favor espera.';
                 if (feedbackBtn) feedbackBtn.classList.add('hidden');
 
                 // Collect input values using Spanish keys to match GAS properties
@@ -459,25 +459,24 @@ document.addEventListener('DOMContentLoaded', () => {
                 const ENDPOINT_URL = 'https://script.google.com/macros/s/AKfycbyyMLqscU4d3mdHAH_Zmt2SaSUzDNy-C68Ue-_frYznxCYvZI1yM6ko4R9cEqUNmxdBdQ/exec';
 
                 try {
-                    let response;
+                    let result;
                     if (ENDPOINT_URL === '#') {
                         // Simulate delay
                         await new Promise(resolve => setTimeout(resolve, 1500));
-                        response = { ok: true };
+                        result = { result: 'success' };
                     } else {
-                        // Send request with mode: 'no-cors'
-                        await fetch(ENDPOINT_URL, {
+                        // Send request with standard CORS fetch (do not use mode: 'no-cors' to allow reading response)
+                        const res = await fetch(ENDPOINT_URL, {
                             method: 'POST',
-                            mode: 'no-cors',
                             headers: {
                                 'Content-Type': 'text/plain;charset=utf-8'
                             },
                             body: JSON.stringify(data)
                         });
-                        response = { ok: true };
+                        result = await res.json();
                     }
 
-                    if (response.ok) {
+                    if (result.result === 'success') {
                         // Success State
                         if (feedbackSpinner) feedbackSpinner.classList.add('hidden');
                         if (feedbackSuccessCheck) feedbackSuccessCheck.classList.remove('hidden');
@@ -485,6 +484,7 @@ document.addEventListener('DOMContentLoaded', () => {
                         if (feedbackDesc) feedbackDesc.textContent = 'Nos comunicaremos por WhatsApp para confirmar.';
                         if (feedbackBtn) {
                             feedbackBtn.classList.remove('hidden');
+                            feedbackBtn.textContent = 'Entendido';
                             feedbackBtn.onclick = () => {
                                 gsap.to(bookingFeedback, { 
                                     opacity: 0, 
@@ -500,16 +500,34 @@ document.addEventListener('DOMContentLoaded', () => {
                             };
                         }
                     } else {
-                        throw new Error('Server error');
+                        // Capacity Limit / Business Logic Error State
+                        if (feedbackSpinner) feedbackSpinner.classList.add('hidden');
+                        if (feedbackSuccessCheck) feedbackSuccessCheck.classList.add('hidden');
+                        if (feedbackTitle) feedbackTitle.textContent = 'Aforo Completo';
+                        if (feedbackDesc) feedbackDesc.textContent = result.error || 'No hay lugares disponibles en este horario.';
+                        if (feedbackBtn) {
+                            feedbackBtn.classList.remove('hidden');
+                            feedbackBtn.textContent = 'Modificar Reservación';
+                            feedbackBtn.onclick = () => {
+                                gsap.to(bookingFeedback, { 
+                                    opacity: 0, 
+                                    duration: 0.3, 
+                                    ease: 'power2.in',
+                                    onComplete: () => bookingFeedback.classList.add('hidden')
+                                });
+                            };
+                        }
                     }
                 } catch (error) {
-                    // Error State
+                    // Network / Connection Error State
+                    console.error("Fetch error:", error);
                     if (feedbackSpinner) feedbackSpinner.classList.add('hidden');
                     if (feedbackSuccessCheck) feedbackSuccessCheck.classList.add('hidden');
                     if (feedbackTitle) feedbackTitle.textContent = 'Error al Enviar';
                     if (feedbackDesc) feedbackDesc.textContent = 'Ocurrió un problema de red. Por favor intenta de nuevo.';
                     if (feedbackBtn) {
                         feedbackBtn.classList.remove('hidden');
+                        feedbackBtn.textContent = 'Intentar de nuevo';
                         feedbackBtn.onclick = () => {
                             gsap.to(bookingFeedback, { 
                                 opacity: 0, 
