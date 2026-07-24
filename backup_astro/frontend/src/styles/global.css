@@ -1,9 +1,0 @@
-@import "tailwindcss";
-
-@theme {
-  --color-sushi-black: #0A0A0A;
-  --color-sushi-white: #F5F5F7;
-  --color-sushi-red: #E60012;
-  
-  --font-sans: "Inter", "SF Pro Display", "system-ui", sans-serif;
-}
