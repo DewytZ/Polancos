@@ -456,7 +456,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     sucursal: formData.get('sucursal')
                 };
 
-                const ENDPOINT_URL = 'https://script.google.com/macros/s/AKfycbyyMLqscU4d3mdHAH_Zmt2SaSUzDNy-C68Ue-_frYznxCYvZI1yM6ko4R9cEqUNmxdBdQ/exec';
+                const ENDPOINT_URL = '/api/reservas';
 
                 try {
                     let result;
@@ -465,15 +465,21 @@ document.addEventListener('DOMContentLoaded', () => {
                         await new Promise(resolve => setTimeout(resolve, 1500));
                         result = { result: 'success' };
                     } else {
-                        // Send request with standard CORS fetch (do not use mode: 'no-cors' to allow reading response)
+                        // Send request to Spring Boot API
                         const res = await fetch(ENDPOINT_URL, {
                             method: 'POST',
                             headers: {
-                                'Content-Type': 'text/plain;charset=utf-8'
+                                'Content-Type': 'application/json;charset=utf-8'
                             },
                             body: JSON.stringify(data)
                         });
-                        result = await res.json();
+                        
+                        if (res.ok) {
+                            result = { result: 'success' };
+                        } else {
+                            const errorData = await res.json();
+                            result = { result: 'error', error: errorData.message || errorData.error || 'Error en el servidor' };
+                        }
                     }
 
                     if (result.result === 'success') {
