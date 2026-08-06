@@ -210,6 +210,13 @@
 			}
 		}
 
+		function formatDateToDMY(dateStr) {
+			if (!dateStr) return '';
+			const parts = dateStr.split('-');
+			if (parts.length !== 3) return dateStr;
+			return `${parts[2]}/${parts[1]}/${parts[0]}`;
+		}
+
 		// 2. Render Table and Summary Cards
 		function renderReservations() {
 			const tableBody = document.getElementById('reservas-table-body');
@@ -220,13 +227,13 @@
 
 			if (reservationsList.length === 0) {
 				emptyState.classList.remove('hidden');
-				countLabel.textContent = "0 reservaciones";
+				countLabel.textContent = `0 reservaciones para el ${formatDateToDMY(activeDate)}`;
 				updateSummaryCards(0, 0, 0);
 				return;
 			}
 
 			emptyState.classList.add('hidden');
-			countLabel.textContent = `${reservationsList.length} reservaciones registradas`;
+			countLabel.textContent = `${reservationsList.length} reservaciones para el ${formatDateToDMY(activeDate)}`;
 
 			let totalGuests = 0;
 			let pendingCount = 0;

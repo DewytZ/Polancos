@@ -70,8 +70,10 @@ public class ReservaService {
         }
 
         // 5. Generar Enlace de WhatsApp
+        java.time.format.DateTimeFormatter dateFormatter = java.time.format.DateTimeFormatter.ofPattern("dd/MM/yyyy");
+        String fechaFormateada = fecha.format(dateFormatter);
         String textMessage = "Hola " + nombre + ", te contactamos de Polanco's Roll para confirmar tu reservación para " + 
-                personas + " personas el dia " + fecha + " a las " + hora + ".";
+                personas + " personas el dia " + fechaFormateada + " a las " + hora + ".";
         String waLink = "";
         try {
             String encodedText = URLEncoder.encode(textMessage, StandardCharsets.UTF_8.toString());
