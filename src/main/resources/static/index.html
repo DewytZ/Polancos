@@ -40,6 +40,11 @@
     <script src="https://cdn.jsdelivr.net/npm/lenis@1.1.18/dist/lenis.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+    <!-- Flatpickr for Date Inputs -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/themes/dark.css">
+    <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+    <script src="https://cdn.jsdelivr.net/npm/flatpickr/dist/l10n/es.js"></script>
     
     <!-- Custom script -->
     <script src="js/main.js" defer></script>
@@ -342,9 +347,10 @@
 								<div class="space-y-2">
 									<label for="fecha" class="block text-[10px] uppercase tracking-[0.2em] text-neutral-500 font-mono">Fecha</label>
 									<input 
-										type="date" 
+										type="text" 
 										name="fecha" 
 										id="fecha" 
+										placeholder="Seleccionar fecha"
 										required
 										disabled
 										class="bg-transparent border-b border-white/10 py-3 px-1 text-sushi-white placeholder:text-neutral-700 focus:outline-none focus:border-sushi-red transition-colors duration-300 w-full text-sm font-light disabled:opacity-40 disabled:cursor-not-allowed"

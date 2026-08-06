@@ -364,12 +364,30 @@ document.addEventListener('DOMContentLoaded', () => {
                 };
 
                 const minDateString = formatDate(minDate);
-                bookingDateInput.min = minDateString;
-                bookingDateInput.max = formatDate(maxDate);
-
-                // Default or adjust date value if out of bounds
-                if (!bookingDateInput.value || bookingDateInput.value < minDateString || bookingDateInput.value > bookingDateInput.max) {
-                    bookingDateInput.value = minDateString;
+                
+                // Initialize or update Flatpickr instance to enforce DD/MM/YYYY format
+                if (!window.bookingDatePicker) {
+                    window.bookingDatePicker = flatpickr(bookingDateInput, {
+                        locale: "es",
+                        dateFormat: "Y-m-d",
+                        altInput: true,
+                        altFormat: "d/m/Y",
+                        minDate: minDate,
+                        maxDate: maxDate,
+                        defaultDate: minDate,
+                        disableMobile: "true",
+                        onChange: function() {
+                            updateTimeConstraints();
+                        }
+                    });
+                } else {
+                    window.bookingDatePicker.set("minDate", minDate);
+                    window.bookingDatePicker.set("maxDate", maxDate);
+                    if (window.bookingDatePicker.selectedDates.length === 0 || 
+                        window.bookingDatePicker.selectedDates[0] < minDate || 
+                        window.bookingDatePicker.selectedDates[0] > maxDate) {
+                        window.bookingDatePicker.setDate(minDate);
+                    }
                 }
 
                 // Clear current options inside bookingTimeInput (except the first default one)

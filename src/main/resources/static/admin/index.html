@@ -37,6 +37,11 @@
 			cursor: pointer;
 		}
 	</style>
+	<!-- Flatpickr for Date Selector -->
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/themes/dark.css">
+	<script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+	<script src="https://cdn.jsdelivr.net/npm/flatpickr/dist/l10n/es.js"></script>
 </head>
 <body class="text-sushi-white min-h-screen pb-12 relative">
 
@@ -90,8 +95,9 @@
 			<div class="flex items-center space-x-3 bg-white/[0.02] border border-white/5 px-4 py-2 max-w-sm rounded">
 				<span class="text-[10px] font-semibold text-neutral-400 uppercase tracking-widest">FECHA:</span>
 				<input 
-					type="date" 
+					type="text" 
 					id="date-picker"
+					placeholder="Seleccionar fecha"
 					class="bg-transparent text-sm text-sushi-white focus:outline-none font-mono"
 				>
 			</div>
@@ -175,9 +181,20 @@
 		let activeDate = new Date().toISOString().split('T')[0];
 		let reservationsList = [];
 
-		// Initialize Date picker to today
+		// Initialize Flatpickr Date picker to today (enforcing DD/MM/YYYY)
 		const datePicker = document.getElementById('date-picker');
-		datePicker.value = activeDate;
+		const adminDatePicker = flatpickr(datePicker, {
+			locale: "es",
+			dateFormat: "Y-m-d",
+			altInput: true,
+			altFormat: "d/m/Y",
+			defaultDate: activeDate,
+			disableMobile: "true",
+			onChange: function(selectedDates, dateStr, instance) {
+				activeDate = dateStr;
+				fetchReservations();
+			}
+		});
 
 		// 1. Fetch Reservations
 		async function fetchReservations() {
@@ -383,10 +400,7 @@
 			fetchReservations();
 		});
 
-		datePicker.addEventListener('change', (e) => {
-			activeDate = e.target.value;
-			fetchReservations();
-		});
+		// Date picker events are handled by Flatpickr onChange callback
 
 		// 5. Logout Session Handler
 		document.getElementById('logout-btn').addEventListener('click', () => {
