@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Polanco's Roll - Admin Login</title>
+	<!-- Fonts -->
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;800&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+	<!-- Tailwind CSS CDN -->
+	<script src="https://cdn.tailwindcss.com"></script>
+	<script>
+		tailwind.config = {
+			theme: {
+				extend: {
+					colors: {
+						'sushi-red': '#E60012',
+						'sushi-black': '#0A0A0A',
+						'sushi-white': '#F5F5F7'
+					}
+				}
+			}
+		}
+	</script>
+	<style>
+		body {
+			font-family: 'Inter', sans-serif;
+			background-color: #0A0A0A;
+		}
+		.title-font {
+			font-family: 'Cinzel', serif;
+		}
+	</style>
+</head>
+<body class="text-sushi-white min-h-screen flex items-center justify-center p-4 relative overflow-hidden">
+	
+	<!-- Background Ambient Glow -->
+	<div class="absolute w-[500px] h-[500px] rounded-full bg-sushi-red/5 blur-[120px] -top-40 -left-40 pointer-events-none"></div>
+	<div class="absolute w-[500px] h-[500px] rounded-full bg-sushi-red/5 blur-[120px] -bottom-40 -right-40 pointer-events-none"></div>
+
+	<!-- Login Container -->
+	<div class="w-full max-w-md border border-white/5 bg-white/[0.02] backdrop-blur-md p-8 md:p-10 shadow-2xl relative z-10">
+		<!-- Header -->
+		<div class="text-center space-y-3 mb-8">
+			<h1 class="text-2xl font-black tracking-[0.2em] title-font text-sushi-white">
+				POLANCO'S<span class="text-sushi-red">.</span>
+			</h1>
+			<p class="text-xs uppercase tracking-[0.3em] text-neutral-500 font-medium">Panel de Administración</p>
+		</div>
+
+		<!-- Alert Container -->
+		<div id="error-alert" class="hidden border border-sushi-red/20 bg-sushi-red/5 px-4 py-3 text-xs text-sushi-red mb-6 flex items-center space-x-2 font-mono">
+			<svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+				<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
+			</svg>
+			<span id="error-text">Usuario o contraseña incorrectos.</span>
+		</div>
+
+		<!-- Form -->
+		<form id="login-form" class="space-y-6">
+			<div class="space-y-2">
+				<label for="username" class="block text-[10px] font-semibold tracking-widest text-neutral-400 uppercase">Usuario</label>
+				<input 
+					type="text" 
+					id="username" 
+					name="username" 
+					required
+					placeholder="Ingrese su usuario"
+					class="w-full bg-white/[0.03] border border-white/10 px-4 py-3.5 text-sm text-sushi-white placeholder-neutral-600 focus:outline-none focus:border-sushi-red transition-colors duration-300 font-light"
+				>
+			</div>
+
+			<div class="space-y-2">
+				<label for="password" class="block text-[10px] font-semibold tracking-widest text-neutral-400 uppercase">Contraseña</label>
+				<input 
+					type="password" 
+					id="password" 
+					name="password" 
+					required
+					placeholder="••••••••"
+					class="w-full bg-white/[0.03] border border-white/10 px-4 py-3.5 text-sm text-sushi-white placeholder-neutral-600 focus:outline-none focus:border-sushi-red transition-colors duration-300 font-light"
+				>
+			</div>
+
+			<button 
+				type="submit" 
+				id="submit-btn"
+				class="w-full bg-sushi-red hover:bg-sushi-red/90 text-sushi-white font-semibold uppercase tracking-[0.2em] text-xs py-4 border border-sushi-red shadow-xl shadow-sushi-red/10 block text-center cursor-pointer transition-all duration-300 hover:-translate-y-0.5"
+			>
+				Ingresar
+			</button>
+		</form>
+	</div>
+
+	<script>
+		const form = document.getElementById('login-form');
+		const errorAlert = document.getElementById('error-alert');
+		const errorText = document.getElementById('error-text');
+		const submitBtn = document.getElementById('submit-btn');
+
+		form.addEventListener('submit', async (e) => {
+			e.preventDefault();
+			
+			errorAlert.classList.add('hidden');
+			submitBtn.disabled = true;
+			submitBtn.textContent = 'Autenticando...';
+
+			const username = document.getElementById('username').value;
+			const password = document.getElementById('password').value;
+
+			try {
+				const response = await fetch('/api/admin/login', {
+					method: 'POST',
+					headers: {
+						'Content-Type': 'application/json'
+					},
+					body: JSON.stringify({ username, password })
+				});
+
+				const data = await response.json();
+
+				if (response.ok && data.result === 'success') {
+					// Redirigir al dashboard
+					window.location.href = '/admin/index.html';
+				} else {
+					errorText.textContent = data.error || 'Credenciales incorrectas.';
+					errorAlert.classList.remove('hidden');
+					submitBtn.disabled = false;
+					submitBtn.textContent = 'Ingresar';
+				}
+			} catch (err) {
+				console.error(err);
+				errorText.textContent = 'Error de red. Intente de nuevo.';
+				errorAlert.classList.remove('hidden');
+				submitBtn.disabled = false;
+				submitBtn.textContent = 'Ingresar';
+			}
+		});
+	</script>
+</body>
+</html>

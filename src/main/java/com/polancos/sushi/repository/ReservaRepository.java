@@ -23,4 +23,6 @@ public interface ReservaRepository extends JpaRepository<Reserva, Long> {
             @Param("startTime") LocalTime startTime,
             @Param("endTime") LocalTime endTime
     );
+
+    java.util.List<Reserva> findBySucursalAndFechaOrderByHoraAsc(Sucursal sucursal, LocalDate fecha);
 }
