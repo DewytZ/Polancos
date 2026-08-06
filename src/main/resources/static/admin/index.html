@@ -279,10 +279,19 @@
 							</a>
 						` : ''}
 
+						<!-- Hold Reservation / En Espera -->
+						<button 
+							onclick="updateReservationStatus(${res.id}, 'Pendiente')"
+							class="w-8 h-8 rounded border border-white/5 bg-white/[0.02] hover:border-amber-500/30 hover:bg-amber-500/5 text-neutral-400 hover:text-amber-500 transition-all duration-200 ${res.estado === 'Pendiente' ? 'pointer-events-none opacity-20' : ''}"
+							title="Poner En Espera (Pendiente)"
+						>
+							⏳
+						</button>
+
 						<!-- Confirm Reservation -->
 						<button 
 							onclick="updateReservationStatus(${res.id}, 'Confirmada')"
-							class="w-8 h-8 rounded border border-white/5 bg-white/[0.02] hover:border-emerald-500/30 hover:bg-emerald-500/5 text-neutral-400 hover:text-emerald-500 transition-all duration-200 ${res.estado === 'Confirmada' || res.estado === 'Cancelada' ? 'pointer-events-none opacity-20' : ''}"
+							class="w-8 h-8 rounded border border-white/5 bg-white/[0.02] hover:border-emerald-500/30 hover:bg-emerald-500/5 text-neutral-400 hover:text-emerald-500 transition-all duration-200 ${res.estado === 'Confirmada' ? 'pointer-events-none opacity-20' : ''}"
 							title="Confirmar Reserva"
 						>
 							✓
