@@ -429,19 +429,19 @@
 						</span>
 					</h2>
 					<p class="text-neutral-400 text-sm max-w-lg font-light leading-relaxed">
-						Disfruta de la mejor experiencia de sushi premium en cualquiera de nuestros 4 puntos de Culiacán. Encuentra tu sucursal más cercana.
-					</p>
-				</div>
-
-				<!-- Grid de Sucursales (4 Columnas / Carrusel en móvil) -->
-				<div class="-mx-8 px-[12.5vw] md:mx-0 md:px-0 flex overflow-x-auto [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none] snap-x snap-mandatory gap-6 pb-6 md:pb-0 md:grid md:grid-cols-2 lg:grid-cols-4 md:gap-6">
+						Disfruta de la mejor experiencia de sushi premium en cualquiera de nuestros 4 puntos.			<!-- Grid de Sucursales (4 Columnas) -->
+				<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
 					
 					<!-- Sucursal 1: Conquista -->
-					<div class="w-[75vw] xs:w-[280px] sm:w-[300px] md:w-auto shrink-0 snap-center group border border-white/5 bg-gradient-to-b from-white/[0.02] to-transparent p-6 backdrop-blur-sm flex flex-col justify-between h-[360px] gsap-branch-card">
-						<div class="space-y-5">
+					<div class="group border border-white/10 hover:border-sushi-red/50 bg-gradient-to-b from-neutral-900/90 via-black/80 to-black/95 p-6 backdrop-blur-sm flex flex-col justify-between h-[410px] gsap-branch-card transition-all duration-500 relative overflow-hidden rounded-lg shadow-xl min-w-0">
+						<!-- Subtle Background Image -->
+						<div class="absolute inset-0 bg-cover bg-center opacity-30 group-hover:opacity-50 transition-opacity duration-700 pointer-events-none scale-105 group-hover:scale-100 transition-transform duration-700" style="background-image: url('images/branches/conquista/fachada.jpg');"></div>
+						<!-- Dark Gradient Overlay -->
+						<div class="absolute inset-0 bg-gradient-to-t from-sushi-black via-sushi-black/75 to-transparent pointer-events-none"></div>
+
+						<div class="space-y-4 relative z-10">
 							<div class="flex justify-between items-start">
 								<h3 class="text-lg font-bold uppercase tracking-wider font-['Cinzel'] text-sushi-white group-hover:text-sushi-red transition-colors duration-300">Conquista</h3>
-								<span class="text-[9px] bg-sushi-red/10 text-sushi-red px-2 py-0.5 font-mono uppercase tracking-widest font-semibold">Principal</span>
 							</div>
 							
 							<div class="space-y-3 text-xs">
@@ -457,7 +457,19 @@
 							</div>
 						</div>
 						
-						<div class="pt-4 border-t border-white/5">
+						<div class="pt-4 border-t border-white/10 relative z-10 space-y-3">
+							<button 
+								type="button" 
+								onclick="openBranchGallery('Conquista')" 
+								class="w-full py-2.5 px-3 bg-sushi-red hover:bg-red-700 text-white border border-sushi-red transition-all duration-300 rounded text-[11px] font-semibold uppercase tracking-wider flex items-center justify-center gap-2 group/btn shadow-lg shadow-sushi-red/20"
+							>
+								<span>Mirar más</span>
+								<svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 transform group-hover/btn:scale-110 transition-transform duration-300" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+									<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+									<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
+								</svg>
+							</button>
+
 							<a 
 								href="https://www.google.com/maps/place/Polanco%C2%B4S+Roll+Sushi/@24.8182432,-107.4456607,17z/data=!3m1!4b1!4m6!3m5!1s0x86bcdbad37af74e3:0x3ed199c584952300!8m2!3d24.8182384!4d-107.4430858!16s%2Fg%2F11ssxgdtbc?entry=ttu&g_ep=EgoyMDI2MDYxNi4wIKXMDSoASAFQAw%3D%3D" 
 								target="_blank" 
@@ -472,9 +484,14 @@
 						</div>
 					</div>
 
-					<!-- Sucursal 2: Universitarios -->
-					<div class="w-[75vw] xs:w-[280px] sm:w-[300px] md:w-auto shrink-0 snap-center group border border-white/5 bg-gradient-to-b from-white/[0.02] to-transparent p-6 backdrop-blur-sm flex flex-col justify-between h-[360px] gsap-branch-card">
-						<div class="space-y-5">
+					<!-- Sucursal 2: Universitarios (Con Vista Previa e Imágenes Reales) -->
+					<div class="group border border-white/10 hover:border-sushi-red/50 bg-gradient-to-b from-neutral-900/90 via-black/80 to-black/95 p-6 backdrop-blur-sm flex flex-col justify-between h-[410px] gsap-branch-card transition-all duration-500 relative overflow-hidden rounded-lg shadow-xl min-w-0">
+						<!-- Subtle Background Image -->
+						<div class="absolute inset-0 bg-cover bg-center opacity-30 group-hover:opacity-50 transition-opacity duration-700 pointer-events-none scale-105 group-hover:scale-100 transition-transform duration-700" style="background-image: url('images/branches/universitarios/fachada.jpg');"></div>
+						<!-- Dark Gradient Overlay -->
+						<div class="absolute inset-0 bg-gradient-to-t from-sushi-black via-sushi-black/75 to-transparent pointer-events-none"></div>
+
+						<div class="space-y-4 relative z-10">
 							<div class="flex justify-between items-start">
 								<h3 class="text-lg font-bold uppercase tracking-wider font-['Cinzel'] text-sushi-white group-hover:text-sushi-red transition-colors duration-300">Universitarios</h3>
 							</div>
@@ -492,7 +509,19 @@
 							</div>
 						</div>
 						
-						<div class="pt-4 border-t border-white/5">
+						<div class="pt-4 border-t border-white/10 relative z-10 space-y-3">
+							<button 
+								type="button" 
+								onclick="openBranchGallery('Universitarios')" 
+								class="w-full py-2.5 px-3 bg-sushi-red hover:bg-red-700 text-white border border-sushi-red transition-all duration-300 rounded text-[11px] font-semibold uppercase tracking-wider flex items-center justify-center gap-2 group/btn shadow-lg shadow-sushi-red/20"
+							>
+								<span>Mirar más</span>
+								<svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 transform group-hover/btn:scale-110 transition-transform duration-300" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+									<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+									<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
+								</svg>
+							</button>
+
 							<a 
 								href="https://www.google.com/maps/place/Polanco's+Roll+Sushi/@24.8334314,-107.3961136,14z/data=!4m14!1m7!3m6!1s0x86bcdbad37af74e3:0x3ed199c584952300!2sPolanco%C2%B4S+Roll+Sushi!8m2!3d24.8182384!4d-107.4430858!16s%2Fg%2F11ssxgdtbc!3m5!1s0x86bcdb0073cd8f55:0xd76c72aaa93126b6!8m2!3d24.8334314!4d-107.3961136!16s%2Fg%2F11np_rwbrw?entry=ttu&g_ep=EgoyMDI2MDYxNi4wIKXMDSoASAFQAw%3D%3D" 
 								target="_blank" 
@@ -508,8 +537,8 @@
 					</div>
 
 					<!-- Sucursal 3: Valle Alto -->
-					<div class="w-[75vw] xs:w-[280px] sm:w-[300px] md:w-auto shrink-0 snap-center group border border-white/5 bg-gradient-to-b from-white/[0.02] to-transparent p-6 backdrop-blur-sm flex flex-col justify-between h-[360px] gsap-branch-card">
-						<div class="space-y-5">
+					<div class="group border border-white/10 hover:border-sushi-red/40 bg-gradient-to-b from-white/[0.03] to-transparent p-6 backdrop-blur-sm flex flex-col justify-between h-[410px] gsap-branch-card transition-all duration-300 relative overflow-hidden rounded-lg min-w-0">
+						<div class="space-y-4 relative z-10">
 							<div class="flex justify-between items-start">
 								<h3 class="text-lg font-bold uppercase tracking-wider font-['Cinzel'] text-sushi-white group-hover:text-sushi-red transition-colors duration-300">Valle Alto</h3>
 							</div>
@@ -527,7 +556,19 @@
 							</div>
 						</div>
 						
-						<div class="pt-4 border-t border-white/5">
+						<div class="pt-4 border-t border-white/10 relative z-10 space-y-3">
+							<button 
+								type="button" 
+								onclick="openBranchGallery('Valle Alto')" 
+								class="w-full py-2.5 px-3 bg-sushi-red/10 hover:bg-sushi-red text-sushi-red hover:text-white border border-sushi-red/30 hover:border-sushi-red transition-all duration-300 rounded text-[11px] font-semibold uppercase tracking-wider flex items-center justify-center gap-2 group/btn"
+							>
+								<span>Mirar más</span>
+								<svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 transform group-hover/btn:scale-110 transition-transform duration-300" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+									<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+									<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
+								</svg>
+							</button>
+
 							<a 
 								href="https://www.google.com/maps/place/Polanco%E2%80%99s+Roll+Sushi/@24.8086111,-107.4662963,17z/data=!3m1!4b1!4m6!3m5!1s0x86bcdb004a0ea61d:0x41592c4c8e4b8bcc!8m2!3d24.8086063!4d-107.4637214!16s%2Fg%2F11w_rh32s2?entry=ttu&g_ep=EgoyMDI2MDYxNi4wIKXMDSoASAFQAw%3D%3D" 
 								target="_blank" 
@@ -543,8 +584,8 @@
 					</div>
 
 					<!-- Sucursal 4: Plaza Sendero -->
-					<div class="w-[75vw] xs:w-[280px] sm:w-[300px] md:w-auto shrink-0 snap-center group border border-white/5 bg-gradient-to-b from-white/[0.02] to-transparent p-6 backdrop-blur-sm flex flex-col justify-between h-[360px] gsap-branch-card">
-						<div class="space-y-5">
+					<div class="group border border-white/10 hover:border-sushi-red/40 bg-gradient-to-b from-white/[0.03] to-transparent p-6 backdrop-blur-sm flex flex-col justify-between h-[410px] gsap-branch-card transition-all duration-300 relative overflow-hidden rounded-lg min-w-0">
+						<div class="space-y-4 relative z-10">
 							<div class="flex justify-between items-start">
 								<h3 class="text-lg font-bold uppercase tracking-wider font-['Cinzel'] text-sushi-white group-hover:text-sushi-red transition-colors duration-300">Plaza Sendero</h3>
 							</div>
@@ -562,9 +603,21 @@
 							</div>
 						</div>
 						
-						<div class="pt-4 border-t border-white/5">
+						<div class="pt-4 border-t border-white/10 relative z-10 space-y-3">
+							<button 
+								type="button" 
+								onclick="openBranchGallery('Plaza Sendero')" 
+								class="w-full py-2.5 px-3 bg-sushi-red/10 hover:bg-sushi-red text-sushi-red hover:text-white border border-sushi-red/30 hover:border-sushi-red transition-all duration-300 rounded text-[11px] font-semibold uppercase tracking-wider flex items-center justify-center gap-2 group/btn"
+							>
+								<span>Mirar más</span>
+								<svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 transform group-hover/btn:scale-110 transition-transform duration-300" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+									<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+									<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
+								</svg>
+							</button>
+
 							<a 
-								href="https://www.google.com/maps/place/Plaza+Sendero+Culiac%C3%A1n/@24.8257996,-107.4265684,17z/data=!3m1!4b1!4m6!3m5!1s0x86bcdbe9a451bc8d:0xdd5118ff3886451c!8m2!3d24.8257996!4d-107.4265684!16s%2Fg%2F11f5vrd3t2?entry=ttu&g_ep=EgoyMDI2MDcxNC4wIKXMDSoASAFQAw%3D%3D" 
+								href="https://www.google.com/maps/place/Plaza+Sendero+Culiac%C3%A1n/@24.8257996,-107.4456607,17z/data=!3m1!4b1!4m6!3m5!1s0x86bcdbe9a451bc8d:0xdd5118ff3886451c!8m2!3d24.8257996!4d-107.4265684!16s%2Fg%2F11f5vrd3t2?entry=ttu&g_ep=EgoyMDI2MDcxNC4wIKXMDSoASAFQAw%3D%3D" 
 								target="_blank" 
 								rel="noopener noreferrer" 
 								class="flex items-center justify-between text-[10px] uppercase tracking-widest text-neutral-400 group-hover:text-sushi-white transition-colors duration-300 font-semibold"
@@ -577,10 +630,89 @@
 						</div>
 					</div>
 
+
+
 				</div>
 
 			</div>
 		</section>
+
+		<!-- Modal Galería de Sucursales -->
+		<div id="branch-gallery-modal" class="fixed inset-0 z-50 flex items-center justify-center p-4 sm:p-6 opacity-0 pointer-events-none transition-opacity duration-300">
+			<!-- Backdrop overlay -->
+			<div id="branch-gallery-backdrop" class="absolute inset-0 bg-black/85 backdrop-blur-md transition-opacity"></div>
+			
+			<!-- Modal content container -->
+			<div id="branch-gallery-card" class="relative z-10 w-full max-w-4xl bg-neutral-900 border border-white/15 rounded-2xl shadow-2xl overflow-hidden flex flex-col lg:flex-row transform scale-95 transition-transform duration-300 max-h-[90vh]">
+				<!-- Close button -->
+				<button id="close-branch-gallery" class="absolute top-4 right-4 z-20 w-10 h-10 rounded-full bg-black/60 hover:bg-sushi-red text-white flex items-center justify-center transition-colors duration-200 border border-white/10">
+					<svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+						<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+					</svg>
+				</button>
+
+				<!-- Left Column: Main Image Showcase -->
+				<div class="lg:w-7/12 relative bg-black flex items-center justify-center min-h-[280px] sm:min-h-[360px] lg:min-h-[460px] overflow-hidden group">
+					<img id="gallery-main-img" src="" alt="Vista Sucursal" class="w-full h-full object-cover transition-all duration-500">
+
+					<!-- Navigation Controls -->
+					<button id="gallery-prev" class="absolute left-3 top-1/2 -translate-y-1/2 w-10 h-10 rounded-full bg-black/50 hover:bg-sushi-red text-white flex items-center justify-center transition-all duration-200 border border-white/10 backdrop-blur-sm opacity-80 hover:opacity-100">
+						<svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+							<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M15 19l-7-7 7-7" />
+						</svg>
+					</button>
+					<button id="gallery-next" class="absolute right-3 top-1/2 -translate-y-1/2 w-10 h-10 rounded-full bg-black/50 hover:bg-sushi-red text-white flex items-center justify-center transition-all duration-200 border border-white/10 backdrop-blur-sm opacity-80 hover:opacity-100">
+						<svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+							<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M9 5l7 7-7 7" />
+						</svg>
+					</button>
+				</div>
+
+				<!-- Right Column: Details & Thumbnail Gallery -->
+				<div class="lg:w-5/12 p-6 flex flex-col justify-between space-y-6 overflow-y-auto bg-gradient-to-b from-neutral-900 via-sushi-black to-sushi-black">
+					<div class="space-y-4">
+						<div>
+							<span class="text-[10px] font-mono uppercase tracking-widest text-sushi-red font-semibold">Sucursal Polanco's</span>
+							<h2 id="gallery-branch-title" class="text-2xl font-bold font-['Cinzel'] text-sushi-white">Universitarios</h2>
+						</div>
+
+						<div class="space-y-2 text-xs text-neutral-300">
+							<div class="flex items-start gap-2">
+								<svg class="w-4 h-4 text-sushi-red shrink-0 mt-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+									<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/>
+									<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/>
+								</svg>
+								<p id="gallery-branch-address">Blvd. Universitarios 41, 80010 Culiacán Rosales, Sin.</p>
+							</div>
+							<div class="flex items-center gap-2">
+								<svg class="w-4 h-4 text-sushi-red shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+									<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/>
+								</svg>
+								<p id="gallery-branch-hours" class="font-mono">10:00 AM - 11:00 PM</p>
+							</div>
+						</div>
+
+						<!-- Photos Thumbnails Grid -->
+						<div class="pt-2">
+							<label class="text-[10px] font-mono uppercase tracking-wider text-neutral-400 block mb-2">Galería de Instalaciones</label>
+							<div id="gallery-thumbs" class="grid grid-cols-4 gap-2">
+								<!-- Dynamic thumbs inserted by JS -->
+							</div>
+						</div>
+					</div>
+
+					<!-- Action Buttons -->
+					<div class="pt-4 border-t border-white/10 space-y-2">
+						<button id="gallery-reserve-btn" class="w-full py-3 bg-sushi-red hover:bg-red-700 text-white rounded font-bold uppercase tracking-wider text-xs transition-colors duration-200 shadow-lg shadow-sushi-red/20 flex items-center justify-center gap-2">
+							<span>Reservar en esta sucursal</span>
+							<svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+								<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/>
+							</svg>
+						</button>
+					</div>
+				</div>
+			</div>
+		</div>
 
 		<footer class="py-12 border-t border-white/5 bg-sushi-black">
 			<div class="px-8 md:px-16 max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-6">

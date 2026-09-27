@@ -228,16 +228,17 @@ document.addEventListener('DOMContentLoaded', () => {
         stagger: 0.15
     });
 
+    // Ensure branch cards are always visible
+    gsap.set(".gsap-branch-card", { opacity: 1 });
     gsap.from(".gsap-branch-card", {
         scrollTrigger: {
             trigger: "#sucursales",
-            start: "top 75%"
+            start: "top 98%"
         },
-        opacity: 0,
-        y: 40,
-        duration: 1.2,
-        ease: "expo.out",
-        stagger: 0.15
+        y: 20,
+        duration: 0.6,
+        ease: "power2.out",
+        stagger: 0.1
     });
 
     // Creative Hover Micro-interactions
@@ -565,4 +566,202 @@ document.addEventListener('DOMContentLoaded', () => {
             });
         }
     }
+
+    // ==========================================
+    // 6. Branch Interactive Gallery Lightbox System
+    // ==========================================
+    const branchGalleryData = {
+        "Universitarios": {
+            title: "Universitarios",
+            address: "Blvd. Universitarios 41, 80010 Culiacán Rosales, Sin.",
+            hours: "10:00 AM - 11:00 PM",
+            photos: [
+                { src: "images/branches/universitarios/fachada.jpg" },
+                { src: "images/branches/universitarios/comedor.jpg" },
+                { src: "images/branches/universitarios/barra.jpg" },
+                { src: "images/branches/universitarios/decoracion.jpg" }
+            ]
+        },
+        "Conquista": {
+            title: "Conquista",
+            address: "C. Universo 4802, El Acueducto, 80058 Culiacán Rosales, Sin.",
+            hours: "12:00 PM - 09:45 PM",
+            photos: [
+                { src: "images/branches/conquista/fachada.jpg" },
+                { src: "images/branches/conquista/comedor_1.jpg" },
+                { src: "images/branches/conquista/comedor_2.jpg" }
+            ]
+        },
+        "Valle Alto": {
+            title: "Valle Alto",
+            address: "C. Valle de la Rioja 4965, Valle Alto, 80050 Culiacán Rosales, Sin.",
+            hours: "12:00 PM - 09:45 PM",
+            photos: []
+        },
+        "Plaza Sendero": {
+            title: "Plaza Sendero",
+            address: "Área de Comida Plaza Sendero, Blvd. José Limón, Humaya No. 2545, 80020 Culiacán, Sin.",
+            hours: "10:00 AM - 09:00 PM",
+            photos: []
+        }
+    };
+
+    let currentBranch = null;
+    let currentPhotoIndex = 0;
+
+    const modal = document.getElementById('branch-gallery-modal');
+    const backdrop = document.getElementById('branch-gallery-backdrop');
+    const modalCard = document.getElementById('branch-gallery-card');
+    const closeBtn = document.getElementById('close-branch-gallery');
+    const mainImg = document.getElementById('gallery-main-img');
+    const noPhotosMsg = document.getElementById('gallery-no-photos-msg');
+    const titleEl = document.getElementById('gallery-branch-title');
+    const addressEl = document.getElementById('gallery-branch-address');
+    const hoursEl = document.getElementById('gallery-branch-hours');
+    const thumbsContainer = document.getElementById('gallery-thumbs');
+    const prevBtn = document.getElementById('gallery-prev');
+    const nextBtn = document.getElementById('gallery-next');
+    const reserveBtn = document.getElementById('gallery-reserve-btn');
+
+    function updateGalleryImage(index) {
+        if (!currentBranch || !branchGalleryData[currentBranch]) return;
+        const photos = branchGalleryData[currentBranch].photos;
+        if (!photos || photos.length === 0) return;
+
+        if (index < 0) index = photos.length - 1;
+        if (index >= photos.length) index = 0;
+        currentPhotoIndex = index;
+
+        const photo = photos[currentPhotoIndex];
+        
+        // GSAP Fade transition
+        gsap.to(mainImg, {
+            opacity: 0,
+            scale: 0.96,
+            duration: 0.2,
+            ease: 'power2.in',
+            onComplete: () => {
+                mainImg.src = photo.src;
+                gsap.to(mainImg, { opacity: 1, scale: 1, duration: 0.35, ease: 'power2.out' });
+            }
+        });
+
+        // Update Thumbs Active State
+        if (thumbsContainer) {
+            const thumbs = thumbsContainer.querySelectorAll('.thumb-item');
+            thumbs.forEach((t, i) => {
+                if (i === currentPhotoIndex) {
+                    t.classList.add('ring-2', 'ring-sushi-red', 'opacity-100');
+                    t.classList.remove('opacity-60');
+                } else {
+                    t.classList.remove('ring-2', 'ring-sushi-red', 'opacity-100');
+                    t.classList.add('opacity-60');
+                }
+            });
+        }
+    }
+
+    window.openBranchGallery = function(branchName) {
+        const data = branchGalleryData[branchName];
+        if (!data || !modal) return;
+
+        currentBranch = branchName;
+        currentPhotoIndex = 0;
+
+        titleEl.textContent = data.title;
+        addressEl.textContent = data.address;
+        hoursEl.textContent = data.hours;
+
+        const hasPhotos = data.photos && data.photos.length > 0;
+
+        if (hasPhotos) {
+            if (mainImg) {
+                mainImg.classList.remove('hidden');
+                mainImg.src = data.photos[0].src;
+            }
+            if (noPhotosMsg) {
+                noPhotosMsg.classList.add('hidden');
+                noPhotosMsg.classList.remove('flex');
+            }
+            if (prevBtn) prevBtn.classList.remove('hidden');
+            if (nextBtn) nextBtn.classList.remove('hidden');
+            if (thumbsContainer) {
+                thumbsContainer.parentElement.classList.remove('hidden');
+                thumbsContainer.innerHTML = '';
+                data.photos.forEach((photo, idx) => {
+                    const thumb = document.createElement('button');
+                    thumb.className = `thumb-item relative rounded-lg overflow-hidden border border-white/10 aspect-video group focus:outline-none transition-all duration-200 ${idx === 0 ? 'ring-2 ring-sushi-red opacity-100' : 'opacity-60 hover:opacity-100'}`;
+                    thumb.innerHTML = `<img src="${photo.src}" alt="Foto ${idx + 1}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300">`;
+                    thumb.onclick = () => updateGalleryImage(idx);
+                    thumbsContainer.appendChild(thumb);
+                });
+            }
+        } else {
+            if (mainImg) mainImg.classList.add('hidden');
+            if (noPhotosMsg) {
+                noPhotosMsg.classList.remove('hidden');
+                noPhotosMsg.classList.add('flex');
+            }
+            if (prevBtn) prevBtn.classList.add('hidden');
+            if (nextBtn) nextBtn.classList.add('hidden');
+            if (thumbsContainer) {
+                thumbsContainer.parentElement.classList.add('hidden');
+                thumbsContainer.innerHTML = '';
+            }
+        }
+
+        // Open Modal Animation & Lock Background Scroll
+        if (typeof lenis !== 'undefined' && lenis.stop) lenis.stop();
+        document.body.style.overflow = 'hidden';
+
+        modal.classList.remove('pointer-events-none');
+        gsap.to(modal, { opacity: 1, duration: 0.3, ease: 'power2.out' });
+        gsap.fromTo(modalCard, 
+            { scale: 0.92, y: 20 },
+            { scale: 1, y: 0, duration: 0.4, ease: 'back.out(1.2)' }
+        );
+    };
+
+    function closeGallery() {
+        if (!modal) return;
+
+        // Restore Background Scroll
+        if (typeof lenis !== 'undefined' && lenis.start) lenis.start();
+        document.body.style.overflow = '';
+
+        gsap.to(modalCard, { scale: 0.95, y: 10, duration: 0.25, ease: 'power2.in' });
+        gsap.to(modal, { 
+            opacity: 0, 
+            duration: 0.25, 
+            ease: 'power2.in',
+            onComplete: () => modal.classList.add('pointer-events-none') 
+        });
+    }
+
+    if (closeBtn) closeBtn.onclick = closeGallery;
+    if (backdrop) backdrop.onclick = closeGallery;
+    if (prevBtn) prevBtn.onclick = () => updateGalleryImage(currentPhotoIndex - 1);
+    if (nextBtn) nextBtn.onclick = () => updateGalleryImage(currentPhotoIndex + 1);
+
+    if (reserveBtn) {
+        reserveBtn.onclick = () => {
+            closeGallery();
+            const bookingSec = document.getElementById('booking-section');
+            if (bookingSec) {
+                bookingSec.scrollIntoView({ behavior: 'smooth' });
+            }
+            const sucursalSelect = document.getElementById('sucursal');
+            if (currentBranch && sucursalSelect) {
+                sucursalSelect.value = currentBranch;
+                sucursalSelect.dispatchEvent(new Event('change'));
+            }
+        };
+    }
+
+    document.addEventListener('keydown', (e) => {
+        if (!modal || modal.classList.contains('pointer-events-none')) return;
+        if (e.key === 'Escape') closeGallery();
+        if (e.key === 'ArrowLeft') updateGalleryImage(currentPhotoIndex - 1);
+        if (e.key === 'ArrowRight') updateGalleryImage(currentPhotoIndex + 1);
+    });
 });
